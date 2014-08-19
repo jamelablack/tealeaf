@@ -1,0 +1,28 @@
+Variable Scope
+Scope is defined by blocks.
+A variable defined outside a block (outer scope), can be reassigned inside a block (inner scope). Similarly, you cannot call a variable outside a block that was defined inside the block.
+
+			a = 5        # variable is initialized in the outer scope
+
+			3.times do |n|
+			  a = 3      # is a accessible here, in an inner scope?
+			end
+
+			puts a
+			
+			What is the value of a when it is printed to the screen? 
+
+			The value of a is 3. This is because a is available to the inner scope created by 3.times do ... end, which allowed the code to re-assign the value of a. 
+
+Methods create their own scope, therefore variables defined in them cannot be assinged/called in outerscope:
+	a = 5
+
+	def some_method
+	  a = 3
+	end
+
+	puts a
+
+	What's the value of a? Still 5, because methods create their own scope that's entirely outside of the execution flow. We'll cover this in more detail when we talk about methods, but for now, make sure you don't mix up do/end (blocks) with methods when you're working with variable scope issues.
+
+* Note: the key distinguishing factor for deciding whether code delimited by {} or do/end is considered a block (and thereby creating a new scope for variables), is seeing if the {} or do/end immediately follows a method invocation.

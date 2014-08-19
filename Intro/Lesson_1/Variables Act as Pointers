@@ -1,0 +1,19 @@
+Variables Act as Pointers
+
+Variables act as pointers to a space or place in memory:
+What is the value of "b" in both scenarios?
+1)
+	a = "hi there"
+	b = a
+	a = "not here"
+
+2)
+	a = "hi there"
+	b = a
+	a << ", Bob!"
+
+we can see that the code a = "not here" reassigned the variable a to a completely different address in memory; it's now pointing to an entirely new string. This is what the = operator does. It's important to understand that different memory space can in fact hold the same value, but they are still different places in memory. For example, if our last line of code was a = "hi there", the result would still be the same: a and b in that case would still point to different addresses in memory; they would just happen to have the same value.
+
+The line of code a << ", Bob" did not result in reassigning a to a new string. Rather, it mutated the caller and modified the existing string, which is also pointed to by the variable b. This explains why in this code, b reflects the changes to a - they're both pointing to the same thing.
+
+This is the major point of this section: some operations will mutate the actual address space in memory, thereby affecting all variables that point to that address space. Some operations will not mutate the address space in memory, and instead will re-point the variable to a new address space in memory.
