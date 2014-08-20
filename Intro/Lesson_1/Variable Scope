@@ -25,4 +25,4 @@ Methods create their own scope, therefore variables defined in them cannot be as
 
 	What's the value of a? Still 5, because methods create their own scope that's entirely outside of the execution flow. We'll cover this in more detail when we talk about methods, but for now, make sure you don't mix up do/end (blocks) with methods when you're working with variable scope issues.
 
-* Note: the key distinguishing factor for deciding whether code delimited by {} or do/end is considered a block (and thereby creating a new scope for variables), is seeing if the {} or do/end immediately follows a method invocation.
+* Note: the key distinguishing factor for deciding whether code delimited by {} or do/end is considered a block (and thereby creating a new scope for variables), is seeing if the {} or do/end immediately follows a method invocation. When we use each, times and other methods, followed by {} or do/end, that's when a new block is created.
