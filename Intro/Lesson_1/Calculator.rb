@@ -8,6 +8,7 @@
 #place binding.pry immediately before where you think the problem is in your code or in the method. The best errors are those you can reproduce consistently.
 #var scope - Local variables initialized outer scope can be reassigned inner scope but variables initialized
 #inner scope cannot be accessed outer scope
+#Pass by ref vs pass by value
 require 'pry'
 
 def question(msg)
@@ -20,7 +21,7 @@ num1 = gets.chomp
 question "What's the second number?"
 num2 = gets.chomp
 
-say "1) add 2) subtract 3) multiply 4) divide"
+question "1) add 2) subtract 3) multiply 4) divide"
 operator = gets.chomp
 
 #binding.pry
@@ -31,7 +32,7 @@ elsif operator == '2'
 	result = num1.to_i - num2.to_i
 elsif operator == '3'
 	result = num1.to_i * num2.to_i
-else #operater == '4'
+else #operator == '4'
 	result = num1.to_f / num2.to_f
 end
 

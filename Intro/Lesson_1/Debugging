@@ -1,0 +1,10 @@
+How to debug?
+
+1. Google
+Copy and paste error into Google. Someone has had your issue before. 
+2. Ask questions in the forum (Tealeaf)
+3. Use binding.pry
+4. Paste Errors or problems in Gist
+5. Rubberduck debugging. 
+When you come across a problem - explain how to came to that problem to your coworker - Ms. Rubberduck. Even better, explain the problem to someone who has no programming experience at all. 
+6. Step away from the problem.
