@@ -21,7 +21,7 @@ Extract repetitive code/logic into methods
 String interpolation vs concat
 Extract repetitve logic into methods
 Keep track of variable class for concatenation or comparison
-You want to avoid converting raw data. Sace user input in its raw format to perserve its data integrity and keep ability to run data analysis on user data later.
+You want to avoid converting raw data. Save user input in its raw format to perserve its data integrity and keep ability to run data analysis on user data later.
 Don't spray your program with puts, use pry instead (which allows you to see the state of your application)
 Place binding.pry immediately before where you think the problem is in your code or in the method. The best errors are those you can reproduce consistently.
 Var scope - Local variables initialized outer scope can be reassigned inner scope but variables initialized. Inner scope cannot be accessed outer scope
