@@ -1,56 +1,62 @@
 Lesson 1 Lecture
 
-Lecture 1
-Every expression reports a value.
-Anything is true except for nil and false.
-Mutuating the caller
-Pass By vs Pass by Value
-Arrays maintain order vs Hashes, that do not. 
-1.8 doesn't maintain order while 1.9 maintains order through order of insertion. 
-Know the difference b/w 1.8 and 1.9 hash syntax
-Any object can be a key in a hash, including symbols, strings, and even numbers
-Know how to add a key,value pair to an existing hash. 
-Nested hashes within arrays and hashes with hashes and values as the key/value pair
+Lecture 1 Concepts
+- Every expression reports a value.
+	- Anything is true except for nil and false.
+- Mutuating the caller - some methods mututate the caller, some do not. 
+- Pass By Reference vs Pass by Value
+- Arrays maintain order vs Hashes, that do not. 
+	- Ruby 1.8 doesn't maintain order while 1.9 maintains order through order of insertion. 
+	- Know the difference b/w 1.8 and 1.9 hash syntax
+	- Any object can be a key in a hash, including symbols, strings, and even numbers
+	- Know how to add a key, value pair to an existing hash. 
+	- Nested hashes within arrays and hashes with hashes and values as the key/value pair
 
-Lecture 2
+Lecture 2 Notes
 Calculator Application
-Write a program that will add, subtract, multiply, and divide
-If variable is a number, interpolation converts a number to a string automatically (num.to_s is called without calling explicitly.) 
-If vaiable is number, concatenation will result in an error as you cannot add a number and a string. You must explicity convert num.to_s.
-Extract repetitive code/logic into methods
-String interpolation vs concat
-Extract repetitve logic into methods
-Keep track of variable class for concatenation or comparison
-You want to avoid converting raw data. Save user input in its raw format to perserve its data integrity and keep ability to run data analysis on user data later.
-Don't spray your program with puts, use pry instead (which allows you to see the state of your application)
-Place binding.pry immediately before where you think the problem is in your code or in the method. The best errors are those you can reproduce consistently.
-Var scope - Local variables initialized outer scope can be reassigned inner scope but variables initialized. Inner scope cannot be accessed outer scope
+- Write a program that will add, subtract, multiply, and divide
+- If variable is a number, interpolation converts a number to a string automatically (num.to_s is 	called without calling explicitly.) 
+- If vaiable is number, concatenation will result in an error as you cannot add a number and a 		string. You must explicity convert num.to_s.
+- Extract repetitive code/logic into methods
+- String interpolation vs concat
+- Extract repetitve logic into methods
+- Keep track of variable class for concatenation or comparison
+
+When dealing with raw data...
+	You want to avoid converting raw data. Save user input in its raw format to perserve its data integrity and keep ability to run data analysis on user data later.
+	
+Binding.pry
+	Don't spray your program with puts, use pry instead (which allows you to see the state of your application)
+	Place binding.pry immediately before where you think the problem is in your code or in the method. The best errors are those you can reproduce consistently.
+
+Var scope
+	Local variables initialized outer scope can be reassigned inner scope but variables initialized. Inner scope cannot be accessed outer scope.
 
 Pass by Value vs Pass by Reference
-Pass by Value - when a method is called on an object, the variable is just representation of the value and not the actual obecjt (the reference), itself. When called, the method can never change the object itself. To effect change to the object, you must reassgn the variable.
+	Pass by Value - when a method is called on an object, the variable is just representation of the value and not the actual obecjt (the reference), itself. When called, the method can never change the object itself. To effect change to the object, you must reassgn the variable.
 
-In this case below, outter_str remains unchanged as a result of the method being called.
-def some_method(str)
-  str.changeit
-end
+	In this case below, outter_str remains unchanged as a result of the method being called.
+	def some_method(str)
+	  str.changeit
+	end
 
-outter_str = "hi"
-some_method(outter_str)
-_________________________________
+	outter_str = "hi"
+	some_method(outter_str)
+	_________________________________
 
-Pass by Reference - When a method is called, the opject acts a pointer and a modification is actually made to an actual space in memory. 
+	Pass by Reference - When a method is called, the opject acts a pointer and a modification is actually made to an actual space in memory. 
 
-In the case below, outter_str is just a reference (pointer) to str, therefore any mutations to str will be reflected in the value of str
+	In the case below, outter_str is just a reference (pointer) to str, therefore any mutations to str will be reflected in the value of str
 
-def some_method(str)
-  str.changeit
-end
+	def some_method(str)
+	  str.changeit
+	end
 
-outter_str = "hi"
-some_method(outter_str)
+	outter_str = "hi"
+	some_method(outter_str)
 
-Ruby is Passing by the Reference of the Caller
-Whether or not the method creates a pass by reference or pass by reference scenario depends on whether the method mutates the caller or not
+	Ruby is Passing by the Reference of the Caller
+	Whether or not the method creates a pass by reference or pass by reference scenario depends on whether the method mutates the caller or not
 
 
 

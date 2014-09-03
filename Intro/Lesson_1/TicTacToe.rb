@@ -2,7 +2,7 @@
 
 1. Come up with requirements/specifications - that will determine your own scope.
 2. Application logic, sequence of steps.
-3. Translation od those steps into code.
+3. Translation of those steps into code.
 4. Run code to verfiy logic.=end
 
 

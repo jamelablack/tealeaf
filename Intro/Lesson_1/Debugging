@@ -1,10 +1,12 @@
 How to debug?
+ - Tips on how to work through bugs in your code or large problems where you don't know where to start.
 
-1. Google
-Copy and paste error into Google. Someone has had your issue before. 
-2. Ask questions in the forum (Tealeaf)
-3. Use binding.pry
-4. Paste Errors or problems in Gist
-5. Rubberduck debugging. 
-When you come across a problem - explain how to came to that problem to your coworker - Ms. Rubberduck. Even better, explain the problem to someone who has no programming experience at all. 
-6. Step away from the problem.
+1. Google - copy and paste error into Google. Someone has had your issue before. 
+2. Write out pseudocode - write what you are attempting to do in code in plain engish
+3. Break problems into small, numerical steps - start with what looks familiar ( or you know how to do)
+4. Ask questions in the forum (Tealeaf)
+5. Use binding.pry
+6. Paste Errors or problems in Gist - take issue to IRC chat
+7. Rubberduck debugging. 
+When you come across a problem - explain how to came to that problem to your (fictitious) coworker - Ms. Rubberduck. Even better, explain the problem to someone who has no programming experience at all. 
+8. Step away from the problem.
