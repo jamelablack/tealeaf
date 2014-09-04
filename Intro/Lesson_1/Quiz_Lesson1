@@ -1,0 +1,89 @@
+1. What is the value of a after the below code is executed?
+  a = 1
+  b = a
+  b = 3
+
+My Answer: a = 1
+
+2. What's the difference between an Array and a Hash?
+
+My Answer:
+An array is an object that stores a set of values in a specific order. 
+	- used best when order matters
+	- when a fifo/lifo structure is needed
+
+
+A hash is a series of key, value pair sets ordered by order of insertion.
+	- used best when the data has specific labels
+
+
+3. Every Ruby expression returns a value. Say what value is returned in the below expressions:
+
+		arr = [1, 2, 3, 3]
+		[1, 2, 3, 3].uniq
+		[1, 2, 3, 3].uniq!
+
+My Answer: 
+arr = [1,2,3]
+
+4. What's the difference between the map and select methods for the Array class? Give an example of when you'd use one versus the other.
+
+My Answer:
+Map returns a value at a particular indicie and Select returns a particular value.
+
+++++++++++SOLUTION:
+Answer: Map and select are both methods that iterate through an array. Both are similar in that they return a new array. However, they are used for different situations.
+
+
+Map is used to iterate through an array of elements, returning a new array with values of the called block. This block applies a method to each of the elements, thus transforming the existing array. Select is used to iterate through an array of elements, returning a new array with values that returns true for the block of condition. 
+
+For example,
+
+arr = [1, 2, 3, 4, 5]
+
+# The block is calling a method on each of the elements in the array.
+arr.map { |e| e + 1 }       # => [2, 3, 4, 5, 6]
+arr.select { |e| e + 1 }    # => [1, 2, 3, 4, 5]
+
+# The block is calling a condition on each of the elements in the array.
+arr.select { |e| e.even? }  # => [2, 4]
+arr.map { |e| e.even? }     # => [false, true, false, true, false]
+++++++++++++++++++
+
+5. Say you wanted to create a Hash. How would you do so if you wanted the hash keys to be String objects instead of symbols?
+
+My Answer:
+my_hash = {"key1": "value1", "key2": "value2"}
+
+6. What is returned?
+
+
+  x = 1
+
+  x.odd? ? "no way!" : "yes, sir!"
+
+  My Answer:
+  "no way!"
+
+  7.What is x?
+
+  x = 1
+
+  3.times do
+    x += 1
+  end
+
+  puts x
+
+  My Answer = 4
+
+  8. What is x?
+
+
+  3.times do
+    x += 1
+  end
+
+  puts x
+
+  My answer: Error, undefined method.
