@@ -1,0 +1,67 @@
+Classes model state and behavior.
+
+State:
+the individual attributes of an object
+Behavior:
+what are our objects capable of doing
+
+**Initialzine a new object
+The initialize method is called every time you create a new object. 
+The ".new " method is called at the class level which leads us to calling the initialize instance method. 
+The initialize method is considered the "constructor" because it triggered whenever we create a new object.
+
+Example:
+# good_dog.rb
+
+class GoodDog
+  def initialize
+    puts "This object was initialized!"
+  end
+end
+
+sparky = GoodDog.new        # => "This object was initialized!"
+_______________________
+**Instance Variables
+Example:
+# good_dog.rb
+
+class GoodDog
+  def initialize(name)
+    @name = name
+  end
+end
+ The @name is an instance variable that exists as long as the object instance exists and is one of the ways we tie data to objects. It doesn't die after the initalize method is run, but lives on to be referenced until the object instace is destroyed. 
+
+
+ *** Accessor Methods
+ Getter method allows you to print the name of an instance variable:
+   def get_name
+    @name
+  end
+  ==> puts sparky.get_name
+
+  Setter Method allows you to set the name of an instance variable:
+    def set_name=(name)
+    @name = name
+  end
+===> sparky.set_name = "Spartacus"
+		puts sparky.get_name
+
+attr_accessor
+this replaces both the getter and setter methods 
+the attr_accessor method takes a symbol as an argument
+
+attr_reader - is used if you only want to use the getter method and not the setter.
+			- when you only want to print/puts the instance method
+
+attr_writter - when you only want to use the setter method
+
+In any case, the attr_*, takes a Symbol as parameters, if there are more than states being modeled you will see:
+	attr_accessor :name, :height, :weight 
+
+Accessor Methods in Action
+With getter and setter methods, we have a way to expose and change an objects state
+
+Just like when we replaced accessing the instance variable directly with getter methods, we also want to refrain from setting the instance variables directly. We'd like to use our setter methods instead. 
+
+You should use .self rather than changing the instance variable directly when state/attribute is using attr_accessor.
