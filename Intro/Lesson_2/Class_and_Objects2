@@ -1,0 +1,53 @@
+Class_and_Objects2
+
+Class Methods
+Objects contain state/attributes, and if we have a method that does not need to deal with states, then we can just use a class method, like our simple example. We'll take a look at a more useful example in the next section.
+
+When defining a class method, we prepend the method name with the reserved word self., like this:
+
+# good_dog.rb
+# ... rest of code ommitted for brevity
+
+def self.what_am_i         # Class method definition
+  "I'm a GoodDog class!"
+end
+
+Claas Variables
+Just like instance variables capture info that applies to a specific instance of a class, class variables apply to the entire class; using an @@ rather than @.
+
+class GoodDog
+  @@number_of_dogs = 0
+
+  def initialize
+    @@number_of_dogs += 1
+  end
+
+  def self.total_number_of_dogs
+    @@number_of_dogs
+  end
+end
+
+puts GoodDog.total_number_of_dogs   # => 0
+
+dog1 = GoodDog.new
+dog2 = GoodDog.new
+
+puts GoodDog.total_number_of_dogs   # => 2
+
+
+Using .to_s
+Within your class, you can define to_s to change what is output when you type puts, and the same will happen when you itnerpolate. 
+
+______________
+Rules for using .self
+
+Use self when calling setter methods from within the class. In our earlier example we showed that self was necessary in order for our change_info method to work properly. We had to use self to allow Ruby to disambiguate between initializing a local variable and calling a setter method. While not required, it's also a good idea to prepend self when calling all instance methods from within the class, not only for setter methods.
+
+Use self for class method definitions.
+
+Don't forget:
+1. use .self when declaring class methods
+2. use .self anytime when setting a value (attr_getter)
+3. when attr_* is not used, you can reference the instance variable [...@name for example]
+4. .self when used inside an instance method is referencing a the object
+5. .self when outside an instance method is referencing the class itself

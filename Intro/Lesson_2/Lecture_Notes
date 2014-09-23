@@ -1,0 +1,89 @@
+Lecture Notes
+
+Classes and objects: Objects and instantized through classes and contant states and behaviors
+Classes are the cookie cutters
+Instance methods encapsulate behaviors and are defined in classes.
+instance variables = state
+instance methods = behaviors
+Class variables/Class methods
+OOP vs. Procedural
+
+
+
+
+
+Interesting syntax when using equals, setter
+
+def set_name=(new_name)
+	@name = name
+end
+
+jamela = User.new
+
+jamela.set_name = "Jam"
+
+or
+
+def set_name(new_name)
+	@name = name
+end
+
+jamela.set_name("Jam")
+
+Setters:
+You have to use .self when using the setter method within an instance method of the same class. 
+Instance methods are like raw data and you can access them but in general, you always want to use the getters and setters when available for encapsulation and santization.
+
+**Class Variables
+Track states that are common accross all instances within a class
+
+To keep track of number of objects
+@@class = 0
+
+def initialize(n, h, w)
+	@name = n
+	@height = h
+	@weight = w
+	@@count += 1
+end
+@@class_variable +=1
+
+**Class Methods
+Performs behaviors at the class level 
+
+def self.total_count
+"The total number of dogs is #{@@count}"
+end
+
+puts Dog.total_count
+
+***Inheritance
+SubClass < SuperClass
+
+object.ancestors shows you the method look-up
+
+***Namespace
+class User < ActiveRecord::Base
+refers to the inheritance of the Base class inside the ActiveRecord module
+Just like with Cms::User - refers to the User class in the CMS module.
+
+****Modules
+Allows you to mixin modules
+module Swimmable
+	def swim
+	puts "I'm swimming!"
+	end
+end
+
+In method, you can mixin in the module by typing "include Swimmable"
+-In method lookups, a module that is mixin will superecede (be listed first) super classes.
+This means that if a module and a superclass has the same method, the module method will have precedence. 
+- When mixin two modules, the method lookup chain will be effected based on reverse inclusion, meanging the last module included will be looked at first.
+
+The point of modules is extract code that is non-specific to a class... and make it reusable. 
+
+OOP vs Procedural
+Procedural thinks about "what happens next..." and small changes can have big impacts throughout your code.
+
+OOP thinks in terms of objects and how they behave
+

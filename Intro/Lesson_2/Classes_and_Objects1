@@ -47,21 +47,76 @@ end
 ===> sparky.set_name = "Spartacus"
 		puts sparky.get_name
 
-attr_accessor
+*attr_accessor
 this replaces both the getter and setter methods 
 the attr_accessor method takes a symbol as an argument
 
-attr_reader - is used if you only want to use the getter method and not the setter.
+Example:
+class GoodDog
+  attr_accessor :name, :height, :weight
+end
+
+	attr_reader - is used if you only want to use the getter method and not the setter.
 			- when you only want to print/puts the instance method
+Example:
 
-attr_writter - when you only want to use the setter method
 
-In any case, the attr_*, takes a Symbol as parameters, if there are more than states being modeled you will see:
-	attr_accessor :name, :height, :weight 
+
+	attr_writter - when you only want to use the setter method
+
+Example:
+
+
 
 Accessor Methods in Action
+
+With getter and setter methods, we have a way to expose and change an object's state. We can also use these methods from within the class as well. In the previous section, the speak method referenced the @name instance variable, like below:
+
+def speak
+  "#{@name} says arf!"
+end
+Instead of referencing the instance variable directly, we want to use the name getter method that we created earlier, and that is given to us now by attr_accessor. We'll change the speak method to this:
+
+def speak
+  "#{name} says arf!"
+end
+Can you spot the change? By removing the @ symbol, we're now calling the instance method, rather than the instance variable.
+
+Why do this? Why not just reference the @name instance variable, like we did before? Technically, you could just reference the instance variable, but it's generally a good idea to call the getter method instead.
 With getter and setter methods, we have a way to expose and change an objects state
 
 Just like when we replaced accessing the instance variable directly with getter methods, we also want to refrain from setting the instance variables directly. We'd like to use our setter methods instead. 
 
 You should use .self rather than changing the instance variable directly when state/attribute is using attr_accessor.
+
+Basic Rules
+you should refrain from using the instance variable (@name) and use the instance methods from attr_*. Doing so will mean you just drop the @. However when changing the value, you must use .self since dropping the @ will create new variables.
+
+
+To disambiguate from creating a local variable, we need to use self.name= to let Ruby know that we're calling a method. So our change_info code should be updated to this:
+
+def change_info(n, h, w)
+  self.name = n
+  self.height = h
+  self.weight = w
+end
+This tells Ruby that we're calling a setter method, not creating a local variable. To be consistent, we could also adopt this syntax for the getter methods as well, though it is not required.
+
+def info
+  "#{self.name} weighs #{self.weight} and is #{self.height} tall."
+end
+Finally, if we run our code with the updated change_info method that uses the self. syntax, our code works beautifully:
+
+sparky.change_info('Spartacus', '24 inches', '45 lbs')
+puts sparky.info      # => Spartacus weighs 45 lbs and is 24 inches tall.
+Note that prefixing self. is not restricted to just the accessor methods; you can use it with any instance method. For example, the info method is not a method given to us by attr_accessor, but we can still call it using self.info:
+
+# good_dog.rb
+
+class GoodDog
+  # ... rest of code ommited for brevity
+  def some_method
+    self.info
+  end
+end
+
