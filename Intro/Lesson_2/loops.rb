@@ -150,14 +150,33 @@
 # .each
 # |variable|
 
-names = ["Jamela", "Jessica", "Sasha", "Amber"]
-x = 1
-# names.each {|name| puts name}
-names.each do |name|
+# names = ["Jamela", "Jessica", "Sasha", "Amber"]
+# x = 1
+# # names.each {|name| puts name}
+# names.each do |name|
 	
-	end
+# 	end
 
 ## Recursion is another method of looping - calling a method from with in itself.
 
+Double a number until the pre-doubled number is greater than 10.
+
+
+
+Using Fibonacci Sequence
+def fibonacci (number)
+	if (number) < 2
+		number
+	else fibonacci(number - 1) + fibonacci(number -2)
+	end
+end
+
+puts fibonacci(6)
+Write a number that counts down to zero
+def down_to_zero(number)
+	if number == 0
+		puts number
+	else down_to_zero(number-1)
+	end
 
 
