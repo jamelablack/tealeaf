@@ -24,7 +24,7 @@ In Order to Win:
 - The Dealer must hit until she has at least 17.
 - If the dealer busts, then the player wins.
 - If the dealer hits 21, the dealer wins. 
-- If however, the dealer stays, then we compare the sumes of the two hands between the player and dealer;
+- If however, the dealer stays, then we compare the sums of the two hands between the player and dealer;
   higher value wins.=end
 =end
 
@@ -33,6 +33,7 @@ In Order to Win:
 	# Dealer
 	# Card
 	# Deck
+	# Blackjack Game
 
 class Card #class that mimics the actual card. Attributes to find the value of a card - value, suit.
 	attr_accessor :suit, :value
@@ -47,7 +48,7 @@ class Card #class that mimics the actual card. Attributes to find the value of a
 
 end
 
-class Deck #When builing this app procedurally - we had to create a nested arrayusing the product method. Buit instad with OO, 
+class Deck #When building this app procedurally - we had to create a nested arrayusing the product method. Buit instad with OO, 
 	#we are iterating over array to form a new one.
 	attr_accessor :card
 
@@ -75,6 +76,8 @@ end
 
 class Player
 
+	
+
 
 end
 
@@ -89,6 +92,8 @@ class Blackjack
 		@dealer = Dealer.new("FatsTT")
 		@deck = Deck.new
 	end
+
+end
 
 Blackjack.new.run
 
