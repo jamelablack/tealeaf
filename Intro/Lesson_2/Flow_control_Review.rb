@@ -1,3 +1,16 @@
+Types of CONDITIONALS
+1. If/THEN
+2. If on ONE LINE
+3. Order of OPERATIONS
+4. TERNARY OPERATIONS
+5. CASE
+
+
+
+
+
+
+
 #CONDITIONALS 1 (IF, THEN)
 #def flow(x,y)
 # 	if x > y

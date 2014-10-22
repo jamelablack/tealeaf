@@ -1,0 +1,138 @@
+You don't know how to create an OO program by yourself? That's okay - know the concepts...
+and be able to read the code.
+
+Difference b/w websites and web applications
+Websites - static HTML, web server
+Web Applications - Actual server
+
+HTTP
+is broken up into 2 actions:
+
+1. Request
+	- HTTP Verbs/Method
+	- URL
+	- Parameters
+2. Response
+	- Status Code
+	- Payload (not necessarily HTML all the time... could be JSON, XML)
+HTTP is also stateless. B/w every request, the browser must reconsitute the world to resemeble that current state. 
+__________________
+
+1. Request - any interaction that you have with a web application
+	* 2 Types of Requests - this is how a user interacts with the website
+	1. HTTP Verbs
+		- GET
+			- Link or type into address bar
+			- smaller payload (there is a size limit)
+			- parameters are a apart of the URL
+		- POST
+			- forms
+			- larger payload
+			- parameters are submitted in the body
+		- parameters are submitted as apart of a form
+
+
+	2. HTTP Methods
+
+2. Response
+	- Status Code
+		- 200: ok
+		- 301: redirect
+		- 404: File not found
+		- 500: general error
+
+MVC
+Person visits site and a request is to the controller/actionss.
+Depending on the HTTP Verb, URL, and parameters passed - the controller will reference the model for the logic
+and the model, in turn will potentially reach to the database. Once retrieved, the controller render a view.
+
+
+We are foregoing the model and focusing on the request and render features, using a cookie as our sessions. 
+______
+Sinatra App
+
+Sinatra uses localhost:4567
+
+Sinatra doesn't automatically reload - for this, install shotgun and run 'ruby main.rb' => localhost:9393
+
+Link is loaded at '/'
+
+In main.rb:
+
+get '/' do
+  "Hello World" +params[:some].to_s
+end
+
+========= PART 2
+
+Instead of working with code directly - HTML, etc , we want to work with templates (.erb)
+
+			get 'test/' do
+				erb :test
+			end
+
+	- Create test.erb (layout: false) - to remove layout
+
+Instance variables setup in the action are available in the template, but only the template is being rendered
+
+Erb => Embedded Ruby
+
+<% %> Ruby code that doesn't need to be printed to HTML
+<%= %> Ruby code that should be printed out to HTML
+____
+main.rb
+get '/test' do
+	@error = "We've got a problem"
+	erb :test *** points to the test.erb template under the views***
+end
+____
+Persistance - the problem is that accessing the instance variable is only available upon request.
+To display form:
+
+main.rb **display of data**
+get '/' do
+	erb :set_name
+end
+
+set_name.erb
+<h4> Set Player Name </h4>
+
+<form action='/set_name' method='post'
+	Name: <input type='text' name-'player_name' />
+	</br>
+
+	<input type ='submit' class='btn'/>
+
+</form>
+
+_____
+main.rb **handle the submission of the data**
+
+post 'set_name' do
+	
+end
+
+**Whenever making changes to the HTML, you must refresh the browser to take effect.
+
+In order to fix persistence problem, you must use session instead of an instance variable. This allows use to work with cookies( has a limit of 4 kilobytes instead of dealing with relational databases. Can't deal with more than one decks.:
+
+post '/set_name' do
+	session[:player_name] = params[:player_name]
+end
+
+Sessions ca be referenced directly because of the use of cookies. 
+We know that cookies have tied to the session because we did not reference an instance variables.
+
+You can use the following to reference in your templates in order to display content dynamically and reconstitute all the states you expect.
+1. instance variables
+2. Sessions
+3. helper methods
+
+The key to this exercise is to figure out when you will redirect or render:
+
+Post - typically redirect
+Get - typically render
+
+Sinatra is tyically very much to the metal and handles much less than Rails.
+
+

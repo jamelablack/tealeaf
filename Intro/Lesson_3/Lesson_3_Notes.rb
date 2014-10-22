@@ -209,8 +209,7 @@ The response headers are also fairly limited, and the full set is given below:
 - Location is used when sending a redirection and contains the new URL.
 - Server identifies the server generating the message.
 
-Ruby on Rails
-Ruby on Rails
+RUBY ON RAILS 
 The request and response messages are mostly the same, except for the first line and message headers.
 
 In Rails, the ActionController and ActionDispatch modules provide the API for handling request and response messages.
