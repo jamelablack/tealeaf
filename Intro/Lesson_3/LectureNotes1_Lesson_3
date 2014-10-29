@@ -42,7 +42,7 @@ __________________
 		- 500: general error
 
 MVC
-Person visits site and a request is to the controller/actionss.
+Person visits site and a request is to the controller/actions.
 Depending on the HTTP Verb, URL, and parameters passed - the controller will reference the model for the logic
 and the model, in turn will potentially reach to the database. Once retrieved, the controller render a view.
 

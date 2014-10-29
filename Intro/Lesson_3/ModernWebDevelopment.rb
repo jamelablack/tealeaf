@@ -9,7 +9,39 @@ Ohther practices a webj developer must be aware of:
 - mobile operating systems
 
 FRONT-END
-- javascript (frameworks like Backcone, Node.js., Angular, Ember) - the are considered MVC frameworks, writing rich-cc
-- HTML
-- CSS
-- Mobile
+- javascript 
+	- frameworks (JQuery, Prototype)
+	- MVC Libraries (Backbone, Node.js., Angular, Ember) - the are considered MVC frameworks, writing rich-client side applications
+	- ajax
+	- CoffeeScript - is pre-processer that compiles into Js
+- HTML (erb, HAML)
+- CSS  (Sass)
+- Mobile (Responsive Design)
+
+MIDDLEWARE (commonly referred to as server-side code)
+- APIs
+- URLs
+- REST
+- request/response processing
+- security
+	- cross-site scripting
+	- request forgery protection
+	- code injection
+
+BACKEND
+- Databses
+	- Relational Databses (MySQL, Postgres)
+	- NoSQL (MongoDB)
+
+
+	Web Services
+		- request
+		- SOAP
+
+MISC
+	- git 
+	- bundler
+	- rvm
+	- deployment
+	- background processing
+
