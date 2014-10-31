@@ -98,7 +98,7 @@ set_name.erb
 <h4> Set Player Name </h4>
 
 <form action='/set_name' method='post'
-	Name: <input type='text' name-'player_name' />
+	Name: <input type='text' name='player_name' />
 	</br>
 
 	<input type ='submit' class='btn'/>
@@ -135,4 +135,5 @@ Get - typically render
 
 Sinatra is tyically very much to the metal and handles much less than Rails.
 
+**Using the before filter*
 
