@@ -135,5 +135,58 @@ Get - typically render
 
 Sinatra is tyically very much to the metal and handles much less than Rails.
 
-**Using the before filter*
+**Using the before... do filter**
+
+***NOTES FROM BLACKJACK GAME***
+1. main.rb is the game engine.
+
+2. Constants: use constants when numbers are consistent through out the the game. This will allow you to be able the rules of the game in the future without having to comb through thr code to find where to make the change. 
+
+3. "set :sessions, true" facilitates some level of persistency, reconstitutes state and allows for your player info to tracked for that session. 
+
+4. Helpers - "helpers do .... end" any methods within this block will be accessible in both the game engine (main.rb) and the (.erb) templates.
+
+5. Used @error and @success bootstrap instance variables to communicate special messages
+
+6. Require new player to enter in name:
+			post '/new_player' do 
+				if params[:player_name].empty?
+					@error = "Name is required."
+					halt erb(:new_player) #stop, don't execute anything below this, render template instead.
+				end
+				session[:player_name] = params[:player_name]
+				redirect '/game'
+			end
+6. Keep track of who's turn it is with:
+		session[:turn] = session[:player_name]
+
+		or 
+		session[:turn] = "dealer"
+
+7. Instance Variables: using instance variables allow your game engine to communicate to your layout template and the data is erased as soon as another request comes in. 
+
+8. halt erb(:new_player) #means stop, don't execute anything below this, render template instead.
+
+9. Always include "erb :game" to render the desired template rather than creating a redirect loop.
+
+10. When using post in main.rb and forms in .erb, you must specify the method as "post" in erb becasue the default is GET if you don't specify.
+
+					<form action='/new_player' method="post">
+						<input type="text" name="player_name" />
+						<br/>
+						<input type="submit" class="btn btn-inverse" value="Let's Play!"/>
+					</form>
+
+
+<!-- 1. You must designate method="post", the default is "get". 
+2. Must give the input "text" an arbitrary name, in this instance, we chose "player_name"
+3.  main.rb: under post, params is reset everytime you call it, so we must set the params[:player_name] = session[:player_name]-->
+
+
+11. There are different input types for forms including:
+
+	input type = submit
+	input type = text, name = :player_name (must specify a name to track the value)
+
+	
 
