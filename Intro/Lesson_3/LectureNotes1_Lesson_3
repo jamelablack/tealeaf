@@ -120,7 +120,7 @@ post '/set_name' do
 	session[:player_name] = params[:player_name]
 end
 
-Sessions ca be referenced directly because of the use of cookies. 
+Sessions can be referenced directly because of the use of cookies. 
 We know that cookies have tied to the session because we did not reference an instance variables.
 
 You can use the following to reference in your templates in order to display content dynamically and reconstitute all the states you expect.
