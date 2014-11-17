@@ -1,0 +1,43 @@
+SQL Constraints
+SQL constraints are used to specify rules for the data in a table.
+
+ If there is any violation between the constraint and the data action, the action is aborted by the constraint.
+
+Constraints can be specified when the table is created (inside the CREATE TABLE statement) or after the table is created (inside the ALTER TABLE statement).
+
+SQL CREATE TABLE + CONSTRAINT Syntax
+
+	CREATE TABLE table_name
+	(
+	column_name1 data_type(size) constraint_name,
+	column_name2 data_type(size) constraint_name,
+	column_name3 data_type(size) constraint_name,
+	....
+	);
+ In SQL, we have the following constraints:
+
+NOT NULL - Indicates that a column cannot store NULL value
+UNIQUE - Ensures that each row for a column must have a unique value
+PRIMARY KEY - A combination of a NOT NULL and UNIQUE. Ensures that a column (or combination of two or more columns) have an unique identity which helps to find a particular record in a table more easily and quickly
+FOREIGN KEY - Ensure the referential integrity of the data in one table to match values in another table
+CHECK - Ensures that the value in a column meets a specific condition
+DEFAULT - Specifies a default value when specified none for this column
+The next chapters will describe each constraint in detail.
+
+SQL NOT NULL Constraint
+		The NOT NULL constraint enforces a column to NOT accept NULL values.
+
+		The NOT NULL constraint enforces a field to always contain a value. This means that you cannot insert a new record, or update a record without adding a value to this field.
+
+		The following SQL enforces the "P_Id" column and the "LastName" column to not accept NULL values:
+
+		Example
+
+		CREATE TABLE PersonsNotNull
+		(
+		P_Id int NOT NULL,
+		LastName varchar(255) NOT NULL,
+		FirstName varchar(255),
+		Address varchar(255),
+		City varchar(255)
+		)
