@@ -133,14 +133,14 @@ The key to this exercise is to figure out when you will redirect or render:
 Post - typically redirect
 Get - typically render
 
-Sinatra is tyically very much to the metal and handles much less than Rails.
+Sinatra is typically very much to the metal and handles much less than Rails.
 
 **Using the before... do filter**
 
 ***NOTES FROM BLACKJACK GAME***
 1. main.rb is the game engine.
 
-2. Constants: use constants when numbers are consistent through out the the game. This will allow you to be able the rules of the game in the future without having to comb through thr code to find where to make the change. 
+2. Constants: use constants when numbers are consistent through out the the game. This will allow you to be able the rules of the game in the future without having to comb through the code to find where to make the change. 
 
 3. "set :sessions, true" facilitates some level of persistency, reconstitutes state and allows for your player info to tracked for that session. 
 
