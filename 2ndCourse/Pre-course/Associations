@@ -1,0 +1,171 @@
+Types of Associations:
+    belongs_to
+    has_one
+    has_many
+    has_many :through
+    has_one :through
+    has_and_belongs_to_many
+
+1. Belongs_to
+A belongs_to association sets up a one-to-one connection with another model,
+such that each instance of the declaring model "belongs to" one instance of the
+other model.
+
+belongs_to associations must use the singular term. If you used the pluralized form
+in the above example for the customer association in the Order model, you would be
+told that there was an "uninitialized constant Order::Customers".
+
+For example, if your application includes customers and orders, and each order can
+be assigned to exactly one customer, you'd declare the order model this way:
+    class Order < ActiveRecord::Base
+      belongs_to :customer
+    end
+
+
+
+
+
+2. Has_one
+A has_one association also sets up a one-to-one connection with another model,
+but with somewhat different semantics (and consequences). This association indicates
+that each instance of a model contains or possesses one instance of another model.
+
+For example, if each supplier in your application has only one account, you'd declare
+the supplier model like this:
+
+    class Supplier < ActiveRecord::Base
+      has_one :account
+    end
+
+
+3. Has_many
+A has_many association indicates a one-to-many connection with another model.
+You'll often find this association on the "other side" of a belongs_to association.
+This association indicates that each instance of the model has zero or more instances
+of another model. For example, in an application containing customers and orders,
+the customer model could be declared like this:
+
+      class Customer < ActiveRecord::Base
+        has_many :orders
+      end
+
+
+4. Has_many :through
+A has_many :through association is often used to set up a many-to-many connection
+with another model. This association indicates that the declaring model can be
+matched with zero or more instances of another model by proceeding through a third
+model.
+
+For example, consider a medical practice where patients make appointments to see
+physicians. The relevant association declarations could look like this:
+
+    class Physician < ActiveRecord::Base
+      has_many :appointments
+      has_many :patients, through: :appointments
+    end
+
+    class Appointment < ActiveRecord::Base
+      belongs_to :physician
+      belongs_to :patient
+    end
+
+    class Patient < ActiveRecord::Base
+      has_many :appointments
+      has_many :physicians, through: :appointments
+    end
+
+5. Has_one :through
+
+A has_one :through association sets up a one-to-one connection with another model.
+This association indicates that the declaring model can be matched with one instance
+of another model by proceeding through a third model. For example, if each supplier
+has one account, and each account is associated with one account history, then the
+supplier model could look like this:
+
+    class Supplier < ActiveRecord::Base
+      has_one :account
+      has_one :account_history, through: :account
+    end
+
+    class Account < ActiveRecord::Base
+      belongs_to :supplier
+      has_one :account_history
+    end
+
+    class AccountHistory < ActiveRecord::Base
+      belongs_to :account
+    end
+
+6.Has_and_belongs_too_many
+A has_and_belongs_to_many association creates a direct many-to-many connection
+with another model, with no intervening model. For example, if your application
+includes assemblies and parts, with each assembly having many parts and each part
+appearing in many assemblies, you could declare the models this way:
+
+      class Assembly < ActiveRecord::Base
+        has_and_belongs_to_many :parts
+      end
+
+      class Part < ActiveRecord::Base
+        has_and_belongs_to_many :assemblies
+      end
+
+7. Choosing Between belongs_to and has_one
+
+If you want to set up a one-to-one relationship between two models, you'll need
+to add belongs_to to one, and has_one to the other. How do you know which is which?
+
+The distinction is in where you place the foreign key (it goes on the table for
+the class declaring the belongs_to association), but you should give some thought
+to the actual meaning of the data as well. The has_one relationship says that one
+of something is yours - that is, that something points back to you.
+
+For example, it makes more sense to say that a supplier owns an account than that
+an account owns a supplier. This suggests that the correct relationships are like this:
+
+      class Supplier < ActiveRecord::Base
+        has_one :account
+      end
+
+      class Account < ActiveRecord::Base
+        belongs_to :supplier
+      end
+
+8 Choosing Between has_many :through and has_and_belongs_to_many
+Rails offers two different ways to declare a many-to-many relationship between
+models. The simpler way is to use has_and_belongs_to_many, which allows you to
+make the association directly:
+
+    class Assembly < ActiveRecord::Base
+      has_and_belongs_to_many :parts
+    end
+
+    class Part < ActiveRecord::Base
+      has_and_belongs_to_many :assemblies
+    end
+
+The second way to declare a many-to-many relationship is to use has_many :through.
+This makes the association indirectly, through a join model:
+
+    class Assembly < ActiveRecord::Base
+      has_many :manifests
+      has_many :parts, through: :manifests
+    end
+
+    class Manifest < ActiveRecord::Base
+      belongs_to :assembly
+      belongs_to :part
+    end
+
+    class Part < ActiveRecord::Base
+      has_many :manifests
+      has_many :assemblies, through: :manifests
+    end
+The simplest rule of thumb is that you should set up a has_many :through relationship
+if you need to work with the relationship model as an independent entity. If you
+don't need to do anything with the relationship model, it may be simpler to set
+up a has_and_belongs_to_many relationship (though you'll need to remember to create
+the joining table in the database).
+
+You should use has_many :through if you need validations, callbacks, or extra
+attributes on the join model.

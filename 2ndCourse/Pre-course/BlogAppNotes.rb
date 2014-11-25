@@ -55,3 +55,17 @@ Go to Articles controller and create new method:
 
 10. You will get an error that '/create' is undefined. You must create the 'create'
 method in your controller, as you did with 'new'
+
+5.10 Adding Some Validation
+The model file, app/models/article.rb is about as simple as it can get:
+
+class Article < ActiveRecord::Base
+end
+There isn't much to this file - but note that the Article class inherits from ActiveRecord::Base. Active Record supplies a great deal of functionality to your Rails models for free, including basic database CRUD (Create, Read, Update, Destroy) operations, data validation, as well as sophisticated search support and the ability to relate multiple models to one another.
+
+Rails includes methods to help you validate the data that you send to models. Open the app/models/article.rb file and edit it:
+
+class Article < ActiveRecord::Base
+  validates :title, presence: true,
+                    length: { minimum: 5 }
+end
