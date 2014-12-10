@@ -52,8 +52,13 @@ Model layer:
   Problems:
   - has a join model
 
-With hmt you have list the associations in proper order in the models.
+With hmt you have to list the associations in proper order in the models.
   - has_many and then has_many.... through
+
+Link to understand the methods that come with the various assoctiations:
+http://api.rubyonrails.org/classes/ActiveRecord/Associations/ClassMethods.html
+
+
 
 Resources:
 @instance variables created in your controller allow us to retrieve data that we can render in our views
@@ -61,14 +66,14 @@ Resources:
 Include resources and create a nested url:
 
   resources: posts except: [:destroy] do
-    resources [:comments], omly: :[create]
+    resources [:comments], only: :[create]
   end
 Nesting urls takes routes that logcially belong in that url/path of your application.
 
 
 
 Check routes at localhost:3000/rails/info/routes
-Memorize your path/routes.
+Memorize your path/routes (like 8 of them)
 
 
 
@@ -85,4 +90,4 @@ Why?
 Example - you have to re-route some of your routes to another sub-domain
 Example - you have to change your http to https://
 - lesson- never use strings in urls  - its a code smell and it will increase your
-  technical dabt
+  technical debt

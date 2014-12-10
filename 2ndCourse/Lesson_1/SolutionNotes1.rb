@@ -56,6 +56,8 @@ class Comment < ActiveRecord::Base
 end
 
 belongs_to - refers to the current table
+Belongs_to should just let you know that the has_many model( current model) will
+            have foreign_keys of those listed.
 This is saying that on the comment table, I am expecting a foreign_key of user_id
 and post_id
 
