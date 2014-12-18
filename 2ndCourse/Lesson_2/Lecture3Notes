@@ -169,6 +169,7 @@ So Rails 3 is attr_accessible :title (whitelist) and Rails 4 is strong_params in
 
 Now that you have understood post params, next memorize the following:
 
+MEMORIZE!
 def create
 
   @post = Post.new(post_params)
@@ -179,3 +180,4 @@ def create
   else
     render 'new'
   end
+end

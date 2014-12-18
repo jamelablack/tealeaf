@@ -1,0 +1,202 @@
+- Validation
+- General Create Pattern
+- Update Path
+- Form Partial
+- Before_action
+- Nested Resources
+
+Validations are added always at the model layer:
+
+class Post < ActiveRecord::Base
+
+  has_many :comments
+
+
+  validates :title, :presence true
+
+end
+
+Now if you go into the rails console and do Post.new without a title, an error will
+not occur until you try to hit the database, so either Post.save or Post.create.
+
+When you try to do so, the console will return "False". This is because, there is
+an if clause in the create method. See below. Running post.errors in your console will
+print out an array called ActiveModel Errors and will tell you all fields that require
+validation... in other words.. can't be blank.
+
+  def create
+
+    @post = Post.new(post_params)
+
+    if @post.save
+      flash[:notice] = "Your post was created."
+      redirect_to posts_path
+    else
+      render 'new'
+    end
+  end
+
+Errors
+post.errors will generate an array. If you want to parse out the messages...
+type post.errors.full_messages
+
+If post.save/post.create is unsuccessful, then you will 'render' the new form.
+You will 'render' and not 'redirect' becasue we need to access the errors on the instance
+variable in order to display the errors. When the validations arent met and it fails to save,
+save, false is returned in the console and the errors array is populated. However, as
+it stands, the new form will be rendered.
+
+How to display the Errors (Rails Backed Forms Only)
+
+<h3> Creating a Post </h3>
+<% if @post.errors.any? %>
+
+  <h5> There were some errors: </h5>
+
+  <ul>
+    <% @post.errors.full_messages.each do |msg|
+    <div class='alert alert-error'>
+        <li><% msg %> </li>
+      <% end %>
+    </div>
+  </ul>
+<% end %>
+
+<h4> Rails model-backed form helpers </h4>
+  <%= form_for @post do |f| %> # @post could also be Post.new
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :url %>
+  <% f.text_field :title %>
+  <br/>
+  <%= f.submit "Create Post", class: 'btn btn-primary' %>
+<% end %>
+
+Rails creates a div class to allow you to easily point out or style your fields with
+errors called "div class = fields with errors"
+
+Form_for does alot of guessing
+It guesses that New forms should go to /'posts'
+
+If you
+<%= form_for @post do |f| %> # @post could also be Post.new
+If you
+  <%= form_for Post.first do |f| %> # Will bring up the first Post object
+  When doing so, that Post.first is calling
+  method='POST' with a route of '/posts/id' - which is not a listed route, therefore
+  should not be valid.
+
+  But instead of erroring out, it is going to the post/update controller action.
+  Why?
+  This is bc the in addition to the Utf8 and the authenticity token, there is hidden
+  method called _method = 'patch'
+
+  _method is what Rails uses to determine which HTTP verb is used in the routes file
+  or input method. This is becasue not every browser supports all HTTP methods, just most likely
+  GET and POST.
+
+  1. If the object is an existing object, Rails will automatically give it an
+  _method = "PATCH" and the route will become '/post/id'
+
+  2. The new post form and the edit post form can be identical because _method in form_for will
+  take care of it.
+
+  3. Now you can create a partial to extract the form code that will be used for both
+  new and update partials
+
+  So now:
+    1. Create a partial called _form.html.erb under posts
+    2. Extract common code
+      _form.html.erb
+            <% if @post.errors.any? %>
+
+          <h5> There were some errors: </h5>
+
+          <ul>
+            <% @post.errors.full_messages.each do |msg|
+            <div class='alert alert-error'>
+                <li><% msg %> </li>
+              <% end %>
+            </div>
+          </ul>
+        <% end %>
+
+        <h4> Rails model-backed form helpers </h4>
+          <%= form_for @post do |f| %> # @post could also be Post.new
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+
+          <%= f.label :url %>
+          <% f.text_field :title %>
+          <br/>
+          <%= f.submit "Create Post", class: 'btn btn-primary' %>
+        <% end %>
+  3. Then update _new_html.erb
+        <h3> Creating a Post </h3>
+        <%= render 'form' %>
+
+  4. Then do the same for _edit.html.erb
+      <h3> Edit a Post </h3>
+      render 'form'
+
+      BUT you must also ensure that you have all your necessary instance variables
+      created so in your controller
+
+      def edit
+      @post = Post.find(params[:id])
+      end
+
+      which will route to 'post/:id/edit'... named route edit_post_path(post)
+
+
+UPDATE
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      flash[:notice] = "The post has been updated"
+      redirect_to posts_path
+    else
+      render :edit
+    end
+  end
+
+Remember since your _form.html.erb is being used by four actions:
+new, create, edit, and update,
+So you have to make sure you have @post defined in each action in your controller
+or an exception will be thrown. Consequences of dry.
+
+Before_action
+For Rails 4, its before_action
+For Rails 3, its before_filter
+
+Since we are using
+@post = Post.find(params[:id])
+several times in our controller by various actions (show, edit, and update), we should create a method
+called set_post and pass it the before_action, then we can remove @post from those
+
+class PostController < ApplicationController
+before_action :set_post, only: [:show, :edit, :update]
+
+
+def show
+end
+
+def edit
+end
+
+def update
+end
+
+def set_post
+  @post = Post.find(params[:id])
+end
+
+We use before_actions for two reasons
+1. Set up an instance variable
+2. Set up a redirect based on some condition (authentication)
+
+Nested Routes
+Redirect => URL
+Render => template
