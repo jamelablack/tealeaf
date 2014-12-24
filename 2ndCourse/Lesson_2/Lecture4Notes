@@ -93,7 +93,7 @@ If you
   method called _method = 'patch'
 
   _method is what Rails uses to determine which HTTP verb is used in the routes file
-  or input method. This is becasue not every browser supports all HTTP methods, just most likely
+  or input method. This is because not every browser supports all HTTP methods, just most likely
   GET and POST.
 
   1. If the object is an existing object, Rails will automatically give it an
@@ -132,13 +132,13 @@ If you
           <br/>
           <%= f.submit "Create Post", class: 'btn btn-primary' %>
         <% end %>
-  3. Then update _new_html.erb
+  3. Then update new_html.erb
         <h3> Creating a Post </h3>
         <%= render 'form' %>
 
-  4. Then do the same for _edit.html.erb
+  4. Then do the same for edit.html.erb
       <h3> Edit a Post </h3>
-      render 'form'
+      <%= render 'form' %>
 
       BUT you must also ensure that you have all your necessary instance variables
       created so in your controller
@@ -200,3 +200,70 @@ We use before_actions for two reasons
 Nested Routes
 Redirect => URL
 Render => template
+
+**How to create a comment on the Show Post page.
+
+Routes File:
+resources :posts, except: [:destroy] do
+  resources :comments, only: [:create]
+end
+
+show.html.erb (show posts page)
+<h5> Create a Comment </h5>
+
+  <%= form_for [@post, @ comment] %>
+    <%= f.text_area :body %>
+    <br/>
+      <%= f.submit "Create Comment" class: "btn btn-primary" %>
+    <% end %>
+
+
+'/posts/3/comments'
+We are trying to @post must be an existing post and @comment has to be an existing
+comment.
+
+PostsController.rb
+def show
+  @comment = Comment.new
+
+end
+
+Create a CommentsController
+comments_controller.rb
+
+class CommentsController < ApplicationController
+
+def create
+  @post = Post.new(params[:post_id]) #Always run params in binding.pry (in your controller) to check the
+                                      attribute name. Nested routes always have the parent route appended
+                                      to the id, therefore it would be 'post_id'
+  @comment = Comment.new(params.require(:comment).permit(:body))
+  #we could also associate comment and post
+      @comment.post = @post.comments
+      or
+      you could change the above line for @ comments to create an in memory post.comment
+      object with that has the post_id already filled out.
+        @comment = @post.comments.build(params.require(:comment).permit(:body))
+  if @comment.save
+    flash[:notice] = "Your comment was added"
+    redirect_to post_path(@post)
+  else
+    render 'posts/show' #must be a template file... you are trying to indicate
+                        where the file is located
+  end
+
+
+end
+
+
+#typially, we would just create a seperate method for comment_params, we aren't doing
+that because we aren't trying to reuse this line of code for the Update action, only create.
+end
+
+Render vs Redirect
+
+You should also understand what a render is vs a redirect. Render compiles the template
+into HTML and sends the HTML back as part of the response. Redirect sends back a URL
+as part of the response; there's no HTML in a redirect. Most browsers follow the redirected
+URL automatically, and a new request is issued. All redirects will eventually lead to rendering
+of some template, otherwise your browser will display a "too many redirects" error.

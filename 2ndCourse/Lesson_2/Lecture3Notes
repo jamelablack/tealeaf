@@ -66,6 +66,8 @@ When creating pure html forms, use form helpers.
   <br/>
   <%= submit_tag "Create Post", class: 'btn btn-primary' %>
 <% end %>
+
+
 Form helpers do several things:
   1. Automatically determines the method='POST'
     B/c it is a form
