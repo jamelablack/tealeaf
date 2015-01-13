@@ -1,0 +1,51 @@
+Steps
+
+1. >>routes.rb
+add sessions#new, sessions#create, sessions#destory routes
+
+
+2. >>sessions/new.html.erb
+Add html
+
+
+3. >>Sessions_Controller.rb
+
+class SessionsController < ApplicationController
+  def create
+  user = User.where(username: params[:username]).first
+  or
+  user = User.find_by(username: params[:username])
+
+
+
+Alternative Flash syntax
+
+  flash.now[:error] = "There is something wrong with your username or password."
+  render :new
+  end
+
+end
+
+4. >>application_helper.rb
+1. create current_user and logged_in? methods
+*memoization: allows you to only hit the database once when being called multiple times on a template
+2. add helper_method syntax to make accessible in views
+
+5. >>_navigation.html.erb
+
+** Two ways to protect the fuctionality of your application for non-logged in users:
+  1. Links on User Interface (using 'if logged_in? method')
+  2. Urls/Controller actions (using before_action)
+We want to keep those who aren't logged in from creating a post.
+<% if logged_in? %>
+<div class='nav item'>
+  <%= link_to "New Post", new_post_path, class: 'btn btn-success btn-small' %>
+</div>
+<% end %>
+
+6. Add before action to prevent navigation to certain links
+>>posts_controller.rb
+  add before_action :require_user, except: [:index, :show]
+
+7. Create require_user method in application_controller.rb
+8. Remove User.first and add current_user for post.creator and comment.creator
