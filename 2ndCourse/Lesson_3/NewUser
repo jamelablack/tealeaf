@@ -7,4 +7,4 @@ def create
       redirect_to root_path
     else
       render :new
-    end
+    end 

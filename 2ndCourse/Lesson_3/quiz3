@@ -1,0 +1,84 @@
+Quiz: Lesson 3
+
+What's the difference between rendering and redirecting? What's the impact with regards to instance variables, view templates?
+Render is an existing request while rediect is a completely new request that has a
+new set on instance variables
+____
+
+If I need to display a message on the view template, and I'm redirecting, what's the easiest way to accomplish this?
+flash[:notice] = "Message"
+redirect_to :back
+____
+
+If I need to display a message on the view template, and I'm rendering, what's the easiest way to accomplish this?
+flash[:notice] = "Message"
+render :back
+____
+
+Explain how we should save passwords to the database.
+Using bcrypt, password digest and authentication token hash
+_____
+
+What should we do if we have a method that is used in both controllers and views?
+put it in the application_controller and call out as helper_methods at the top
+
+_____
+
+What is memoization? How is it a performance optimization?
+Declaring a value to as default to prevent the need for your application to determine
+that value, thereby increasing performance
+_____
+
+If we want to prevent unauthenticated users from creating a new comment on a post, what should we do?
+wrap feature in logged_in? helper_method
+
+_____
+
+
+Suppose we have the following table for tracking "likes" in our application.
+How can we make this table polymorphic? Note that the "user_id" foreign key is
+tracking who created the like.
+
+id	user_id	photo_id	video_id	post_id
+1	4		12
+2	7			3
+3	2	6
+
+
+id  user_id   likable_type  likeable_id
+
+____
+
+
+
+How do we set up polymorphic associations at the model layer?
+Give example for the polymorphic model (eg, Vote) as well as an example parent model
+(the model on the 1 side, eg, Post).
+
+
+class Users
+has_many :votes
+
+end
+
+class Likes
+belongs_to :creator, class_name: 'User', foreign_key: 'user_id'
+belongs_to :likable, as: polymorphic
+
+
+
+end
+
+
+class Photos
+has_many :votes, as: :voteable
+
+end
+
+class Comments
+has_many :votes as: voteable
+
+
+end
+What is an ERD diagram, and why do we need it?
+An entity relational diagram maps out the relationships, table, column names and field types.

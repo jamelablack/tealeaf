@@ -1,0 +1,44 @@
+Tab toggling using Bootstrap on User Profile:
+>>users/show
+<ul class='nav nav-tabs'>
+  <li class='<%= 'active' if params[:tab].nil? %>'>
+    <%= link_to "Posts (#{@user.posts.size})", user_path(@user) %>
+  </li>
+
+    <li class='<%= 'active' if params[:tab] == 'comments' %>'>
+    <%= link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments') %>
+  </li>
+</ul>
+
+<% if params[:tab].nil? %>
+  <% @user.posts.each do |post| %>
+    <%= render 'posts/post', post: post %>
+  <% end %>
+<% elsif params[:tab] == 'comments' %>
+  <% @user.comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment %>
+  <% end %>
+<% end %>
+_______
+Set boolean to turn on/off show post page (show_post)
+<% show_post ||= false %> #sets default
+
+  <div class="well span8">
+    <em>"<%= comment.body %>"</em>
+    <% if show_post %>
+    on <%= link_to comment.post.title, post_path(comment.post) %>
+    <span class='quiet'>by</span> <%= comment.creator.username %>
+    <small>at <%= display_datetime(comment.created_at) %></small>
+  </div>
+
+>>posts/show
+<%= render 'comments/comment', comment: comment, show_post: false %>
+
+
+
+>>users/show
+<%= render 'comments/comment', comment: comment, show_post: true %>
+
+
+____
+Create index crdfor new record method

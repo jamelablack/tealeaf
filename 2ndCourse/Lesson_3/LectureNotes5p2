@@ -2,7 +2,7 @@ Creating/Updating User
 1. Create resources
     resources :users, only: [:create]
 2. Create users_controller.rb (new, create, edit, update actions)
-    - since password is the virtual attribute for password_digest, you have to include it in strong_params:
+    - since :password is the virtual attribute for :password_digest, you have to include it in strong_params:
       def users_params
 
       params.require(:user).permit(:username, :password)
@@ -36,7 +36,7 @@ Login/Logout
     def create
 
     Let's write pseudo code:
-    What are we trying to do... we want to run user.authenticate('possword')
+    What are we trying to do... we want to run user.authenticate('password')
     How do we accomplish this?
     1. Get user object
     2. See if the password matches
