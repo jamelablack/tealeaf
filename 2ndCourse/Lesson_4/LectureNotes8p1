@@ -1,0 +1,33 @@
+Agenda:
+- voteable validations (ajax and regular flows)
+- exposing APIs
+- extracting common logic from models
+- creating/publishing gem
+
+Voteable Validation:
+We want to prevent users from voting on the same post or comment twice, but at the
+same time, allow them to vote on multiple posts, comments, etc.
+
+class Post < ActiveRecord::Base
+  validates_uniqueness_of :creator, scope: :voteable
+end
+____________
+Showing Js Errors when voting
+You have two options:
+1. Alterting out (currently implemented)
+2. Traverse the DOM
+Just like with using <span id> to change the number of votes, we can also create
+a div.
+posts/_post.html.erb
+  <div id="post_vote_error_<%= post.to_param %>" class="alert alert-error" style="display: none">
+    You can only vote once.
+  </div>
+posts/vote.js.erb
+  if @vote.valid? %>
+    ('#post_<%= @post.to_param %>_votes').html('<%= @post.total_votes %>');
+  else %>
+    ('#post_vote_error_<%= @post.to_param %>').show().html('<%= @vote.errors.full_messages.join'('') %>);
+______________
+APIs
+API are how applications talk to each other
+API versioning is a big deal - you have to have a versioning strategy, typically the date

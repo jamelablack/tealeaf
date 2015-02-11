@@ -179,7 +179,7 @@ we did with require_user. We want to make sure that the user is logged_in? .
 If the current_user is an an admin but not logged_in, an exception will be thrown
 because you must consider nil condition.
 
-def require_user
+def require_admin
   access_denied unless logged_in? and current_user.admin?
 end
 
@@ -191,7 +191,7 @@ end
 6. Move New Category Link (and New Post Link) under if logged_in? under _navigation.html_erb
 >>layout/_navigation.html.erb
 
-<% if logged_in?
+<% if logged_in? and current_user.admin?
   <li>
     <%= link_to "New Post", new_post_path %>
   </li>
@@ -252,16 +252,22 @@ action and running params in rails console
 6. Once logged in, we want the users timezone to be displayed, we must edit the display_datetime method
 in the ApplicationHelper:
 
-module ApplicationHelper
-def display_datetime(dt)
-  if logged_in? && !current_user.time_zone.blank?
-    dt = dt.in_time_zone(current_user.time_zone)
+  module ApplicationHelper
+    def display_datetime(dt)
+      if logged_in? && !current_user.time_zone.blank?
+        dt = dt.in_time_zone(current_user.time_zone)
+      end
+    end
   end
-end
 
 ***time_zone method will display the object's time if its passed a string. So in rails console,
 if you run post.created_at.in_time_zone("Arizona") => will return the datetime object
 
+To understand more about the time_zone_select or the in_time_zone method, look up the documentation.
 
+7. If we wanted to specify the default time in our drop down
 
-end
+      <div class='control-group'>
+    <%= f.label :time_zone %>
+    <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name%>
+  </div>
