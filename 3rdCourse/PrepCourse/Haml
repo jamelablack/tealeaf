@@ -1,0 +1,89 @@
+Writing Basic Haml
+- No closing tags
+- Nesting controlled via strict white-spacing and indenting
+- Nesting tags must be indented on a new line
+- Use spaces or tabs to nest tags within other tags
+- Tabs must be consistent
+
+Examples:
+Haml:
+%h2
+%ul
+	%li
+	%li
+	%li
+
+Links:
+Haml:
+%a{href: '/courses', title: 'Courses'} Courses
+or
+%a(href="/courses" title="Courses") Courses
+
+HTML:
+<a href='courses' title='Courses'>Courses</a>
+
+Divs:
+Haml:
+%section#content.container
+	%div.stats.container
+
+HTML:
+	<section id="content" class="container">
+		<div class="stats container"></div>
+		</section>
+
+Haml will insert a </div> if no HTML tagis explicitly defined:
+Haml:
+stats.container is the same as %div.stats.container
+
+HTML
+<div class="stats container"></div>
+
+
+Adding Ruby:
+Lines to evaluated begin with a hyphen (-)
+Lines to be output begin with an equals sign (=)
+
+Haml:
+- title = 'Rails for Zombies'
+%h1= title
+
+Erb:
+<% title = 'Rails for Zombies' %>
+<h1><%= title%></h1>
+
+HTML output:
+<h1> Rails for Zombies </h1>
+
+Loops:
+Haml:
+- zombies = %w{Ash Bob Jim}
+%section#zombies
+  %ul
+    - zombies.each do |zombie|
+    %li= zombie
+
+ HTML: 
+ <section id="zombies">
+   <ul>
+   <li>Ash</li>
+   <li>Bob</li>
+   <li>Jim</li>
+  </section>
+
+**You can use the same view helpers as before:
+Haml:
+=link_to "Check us out on twitter", "http://twitter.com/codeschool"
+
+HTML:
+<a href="http://"twitter.com/codeschool"><Check us out on twitter</a>
+
+Interpolation:
+You can also use #{} interpolation to insert Ruby expressions
+Haml
+%p Hi, My name is #{@user.name}
+
+HTML:
+<p> Hi, My name is Casey</p>
+
+

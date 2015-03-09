@@ -116,7 +116,7 @@ functionality across several projects:
 1. You need gem: gemcutter (0.7.1)
 2. mkdir voteable-gem
 3. Create voteable.gemspec file within folder
-4. Add the following text:
+4. Add the following tex t:
 
   Gem::Specification.new do |s|
     s.name = "votable_chris_oct"
@@ -162,21 +162,20 @@ functionality across several projects:
 9. To list your newly made gem to make sure
 the push was successful:
 
-  gem push -r voteable_chris_oct
+  gem list -r voteable_chris_oct
 
 10.  THEN ADD GEM TO YOUR GEM FILE
 
     gem 'voteable_chris_oct
 ____________________________________
-You don't have to do this apparently. 
+You don't have to do this apparently.
 
 10. Next you must include the file name in your application.rb file
 
   require 'voteable_chris_oct'
 
 11. The include the module name in your model
-
-  include VoteableChrisOct
+   include VoteableChrisOct
 _______________________________________
 
 12. For changes or updates to your gem:
