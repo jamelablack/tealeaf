@@ -1,0 +1,21 @@
+Better to focus on Queue Items rather
+than just the collective view of the queue.
+
+Before starting TDD, you should set up the view, controller, and routes.
+
+Once routes are created, you then copy the views ui and update it
+as though the methods for the models have already been created.
+
+Then test methods you wrote in the views
+
+using delegate will allow you refer to another model everytime a certain model is called
+
+so therefore:
+
+def category
+  video.category
+end
+
+can be replaced with
+
+delegate :category, to: :video

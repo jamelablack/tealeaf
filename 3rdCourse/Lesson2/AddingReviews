@@ -1,0 +1,19 @@
+1. Add review section from UI controller to the video page
+2. Hardcode some of the code as though the model were created
+3. Add review test to video model - "sets reviews for authenticated users"
+4. Add context to model various paths of expected behavior
+5. Add before filters to dry up code
+
+
+Possible Contexts:
+1. Authenticated User submits a review
+2. Authenticated User doesn;t complete required fields for review (validation error)
+3. Unautheticated user attempts to submit a review
+
+There are a couple differences between build and create,
+but they're not big:
+
+.create is equivalent to .new followed by .save. It's just more succinct.
+.create! is equivalent to .new followed by .save! (throws an error if saving fails). It's also just a wee bit shorter
+I think .build is mostly an alias for .new. It works one way in Rails 3 and another way in Rails < 3.x
+The most important part, however, is that these methods can be called through an association (has_many, etc.) to automatically link the two models.

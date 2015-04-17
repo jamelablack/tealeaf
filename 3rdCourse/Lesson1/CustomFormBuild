@@ -1,0 +1,63 @@
+new.html.haml
+%section.new_todo
+  %h3 Add a new todo
+  = form_for @todo do |f|
+    = f.label :name, "Name"
+    = f.text_field :name
+    = f.label :description, rows: 6
+    %br
+    = f.submit "Add This Todo"
+
+The issue with this code above this that it is not pulling in the
+errors - but rather than errors on the object (bc we would have to do that for
+every form), lets create helper called MyFormBuilder
+____________________________________________
+class MyFormBuilder < ActionView::Helpers::FormBuilder
+  def label(method, text = nil, options = {}, &block)
+    errors = object.errors[method.to_sym]
+    if errors
+      text += " <span class =\"error">#{errors.first}</span>"
+    end
+    super(method, text.html_safe, options, &block)
+    end
+  end
+___ Update new.html.haml
+application_helper.rb
+
+%section.new_todo
+  %h3 Add a new todo
+  = form_for @todo, builder: MyFormBuilder do |f|
+    = f.label :name, "Name"
+    = f.text_field :name
+    = f.label :description, rows: 6
+    %br
+    = f.submit "Add This Todo"
+_____To refactor: we can manually merge in the my_form_for rather passing in the
+MyFormBuilder
+app/helpers/my_form_builder.rb
+module ApplicationHelper
+  def my_form_for(record, options = {}, &proc)
+    form_for(record, options.merge!({builder: MyFormBuidler}), &proc)
+  end
+end
+___Update the new.html.haml
+%section.new_todo
+  %h3 Add a new todo
+  = my_form_for @todo do |f|
+    = f.label :name, "Name"
+    = f.text_field :name
+    = f.label :description, rows: 6
+    %br
+    = f.submit "Add This Todo"
+
+___________________________
+Custom Form Builders in The Wild!
+1. Formtastic
+ You can use semantic form_for
+2. Simple_form (creators of devise)
+  - allows integration with Twitter Bootstrap & Zurb Foundation 3
+  - is not best for those with alot of customization
+  - has default mapping - which is not the best for complex forms
+3. BootstapForm
+  - minimal dsl
+  - similar flow/syntax to Rails

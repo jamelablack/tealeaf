@@ -40,7 +40,7 @@ HTML
 <div class="stats container"></div>
 
 
-Adding Ruby:
+**Adding Ruby:
 Lines to evaluated begin with a hyphen (-)
 Lines to be output begin with an equals sign (=)
 
@@ -55,7 +55,7 @@ Erb:
 HTML output:
 <h1> Rails for Zombies </h1>
 
-Loops:
+**Loops:
 Haml:
 - zombies = %w{Ash Bob Jim}
 %section#zombies
@@ -63,7 +63,7 @@ Haml:
     - zombies.each do |zombie|
     %li= zombie
 
- HTML: 
+ HTML:
  <section id="zombies">
    <ul>
    <li>Ash</li>
@@ -78,7 +78,7 @@ Haml:
 HTML:
 <a href="http://"twitter.com/codeschool"><Check us out on twitter</a>
 
-Interpolation:
+**Interpolation:
 You can also use #{} interpolation to insert Ruby expressions
 Haml
 %p Hi, My name is #{@user.name}
@@ -86,4 +86,10 @@ Haml
 HTML:
 <p> Hi, My name is Casey</p>
 
+**Comments
 
+
+**Filters
+
+
+**Content Formatting

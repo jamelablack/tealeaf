@@ -1,0 +1,29 @@
+Structural Refactor
+Controllers are more of traffic control and methods containing logic should refarctored to
+the model level
+- For simple refactors such as moving methods from controllers to methods,
+since your test suite is already comprehensive enough to cover the current model, you dont have
+to create additional tests at the model level, only if you decide to add additional functionality.
+
+ Typically you shouldn't have more than one conditional or return from a method within a method.
+ You should refactor by moving a piece of the code to private method.
+
+
+ Skinny Controller, Fat Models
+ One of the most common refactors in Rails and one of the most well-known architectural principals
+ in rails.
+ Fat Models, means the models assume the most responsibilty.
+ Good blog post to read:
+ http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model
+ There - James talks about moving responsibilty from the view, to the controller, and then to the model.
+
+ Examples of Opensource Projects that have need to go on a Fat Controller Diet:
+ ChilliProject
+ Redmine
+
+ - both are open source Ruby Project Management Tools.
+
+ **Refactoring to fat models in MyFlix
+ Tip: When refactoring your controllers to fat models, do not move methods that take parameters in a form
+ because that is the purpose of the controller - to talk to the views and models.
+ Look for those that iterate through the model.

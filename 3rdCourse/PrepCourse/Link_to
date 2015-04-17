@@ -1,0 +1,15 @@
+Options:
+
+- @category.videos.each |video| do
+    link_to video, do
+      %img(src="#{video.small_cover_url}")
+
+- @category.videos.each |video| do
+    link_to video_path(video), do
+      %img(src="#{video.small_cover_url}")
+
+- @category.videos.each |video| do
+  link_to image_tag(video.small_cover_url), video_path(video)
+
+- @category.videos.each |video| do
+  link_to image_tag(video.small_cover_url), video

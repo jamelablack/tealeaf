@@ -1,0 +1,27 @@
+
+Generalization or Trianglization:
+Writing general code
+
+  Red-Green Refactor
+
+  Writing Tests to Fail and then refactor your code to pass.
+  Each time - only write enough code to get an different error message or
+
+
+
+  Video.rb
+  def.self.search_by_title(search)
+    where("title like ?", "%#{search}%")
+  end
+
+  VideoController
+  def search
+  @videos = Video.search_by_title(params:search_by_title)
+
+
+  end
+
+  Routes
+
+
+  rake db:reset

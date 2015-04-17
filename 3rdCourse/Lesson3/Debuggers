@@ -1,0 +1,4 @@
+Typical Issues
+Haml indentation
+Syntax errors.. adding an extra ":"
+run binding.pry in the method and entering in the params

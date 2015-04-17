@@ -1,0 +1,26 @@
+Controller Tests
+- are typically considered more functional bc you're pulling together
+multiple components
+
+Steps:
+1. Create directory: controllers
+2. Create spec: todos_conroller.rb
+3. Controller typically have two goals... render and redirect
+require 'spec_helper'
+
+describe TakeController do
+  describe "GET index" do
+  it "set the @todos variable" do
+    cook = Todo.create(name: "cook")
+    sleep = Todo.create(name: "sleep")
+
+    get :index
+    assigns(:todos).should == (cook, sleep)
+  end
+
+  it "remder the index template" do
+    get :index
+    response.should render_template :index
+    end
+  end
+end

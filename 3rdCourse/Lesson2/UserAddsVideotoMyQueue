@@ -1,0 +1,2 @@
+In order to see what parameters are being submitted in an action:
+you can run binding.pry or check the terminal(server) to see what parameters you see being submitted.

@@ -1,0 +1,12 @@
+Use Faker to Generate Fake Data
+Creating fake data when your model has uniqueness validations will throw errors
+if your data is not unique.
+
+Fabricator(:todo) do
+  name { "cooking" }
+  user
+end
+
+Fabricator(:user) do
+  email { "joe@example.com"} ** This will throw an error.
+end

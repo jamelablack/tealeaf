@@ -1,0 +1,107 @@
+1. Add Rspec to your gemfile, make sure to include in both test and development:
+  group :test, :development do
+    gem 'rspec-rails'
+  end
+
+2. rails g rspec:install
+Generates three items:
+  1. .rspec file - contains "color".. just means you want your output to be color-coded
+  2. spec folder
+  3. spec helper - where configuration goes
+
+3. Create models folder inside spec folder
+
+4. Create a todo_spec.rb within the models folder (name of model)
+
+5. Within todo_spec.rb you must:
+  require 'spec_helper'
+
+  describe Todo do
+    it "saves itself" do
+      todo = Todo.new(name: "cook dinner", description: "love me some din din")
+      todo.save
+      Todo.first.name.should == "cook dinner"
+
+  end
+
+  ** "it" is a keyword that begins each test
+  ** "do" implements the test
+  ** .should is another keyword will test to see if we have the desired result.
+  ** == is the matcher
+
+
+ Versions of assertions:
+  something.should == expect_result
+  expect(something).to eq(expect_result) *-Prefered
+  something.should eq(expect_result)
+  expect(something).to include(expect_result)
+
+  BDD is different from TDD in that we want to test what we want test the behavior through a
+  specification, unlike TDD which tests the functionality. Test what we want the unit should do.
+
+  3 steps
+  1. Set the stage - set up your data
+  2. Perform the action
+  3. Ensure the action was performed and we have our desired result.
+
+In the database.yml
+tests are stored in their own db, therefore all you seed data and migrations are
+not in there. So you have to run the following code in your terminal:
+ rake db:migrate db:test:prepare
+
+ This command is will replicate the db schema in dev tin your test db.
+
+When every displaying a collection of something, it is best to specify the order in the model:
+
+  has_many :videos, -> {order("title")}
+
+Practice Tests:
+require 'spec_helper'
+
+describe Video do
+  it "should save" do
+    video = Video.new(title: "Happy Gilmore", description: "Funny-ass Movie")
+    video.save
+    Video.first.title.should eq("Happy Gilmore")
+  end
+
+  it "has a category" do
+    Category.create(name: "Comedy")
+    video = Video.create(title: "40 year old virgin", description: "Pure comedy", category_id: 1)
+    video.category_id.should eq(1)
+  end
+
+  it "requires name" do
+    video1 = Video.new(description: "Testmasters")
+    video1.save.should == false
+  end
+
+  it "requires description" do
+    video2 = Video.new(title: "Testmasters")
+    video2.save.should == false
+  end
+end
+
+require 'spec_helper'
+
+describe Category do
+  it "saves itself" do
+    category = Category.new(name: "Comedy")
+    category.save
+    expect(Category.first.name).to eq("Comedy")
+  end
+
+
+  it "has many videos" do
+    comedy = Category.create(name: "Comedy")
+    harold_kumar = Video.create(title: "Harold & Kumar", description: "Pure comedy", category: comedy)
+    knocked_up = Video.create(title: "Knocked Up", description: "Funny Movie", category: comedy)
+    expect(comedy.videos).to eq([harold_kumar, knocked_up])
+  end
+end
+
+** "It saves itself" tests are merely for practice as your test should never test the functionality
+of rails but your code that you own.
+
+**Using the shoulda-matchers gem drastically shortens our tests:
+Make sure to use proper grammar when possible: have_many, belong_to etc.

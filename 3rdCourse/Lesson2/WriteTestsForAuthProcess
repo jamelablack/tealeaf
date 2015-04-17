@@ -1,0 +1,14 @@
+UsersController
+1. New User, test if its an instance of.
+
+2. Create user, defined within context
+- with valid input
+- with invalid input
+
+3. Under post :create,
+We don't need to continuously create objects using
+mass assignment, we can use Fabricate.attributes_for(:user)
+
+4. Refactor to add before controller
+
+SessionsController
