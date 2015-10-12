@@ -1,0 +1,20 @@
+To run your code in your web browser, you can include it in your HTML file and run in Chrome, This can be done two ways:
+
+1. Start out with basic HTML and then right before the closing </body> tag, include a script element. Within those tags, javascript can be written directly and executed when the page loads.
+
+Exaple:
+<body>
+  <script>
+    console.log("I'm run automatically!");
+  </script>
+</body>
+
+2. Create an external javascript page and include it with the script element using the src attribute:
+
+Example:
+<body>
+  <script src="my_javascript.js"></script>
+</body>
+
+You must refresh the borwser in both instances.
+

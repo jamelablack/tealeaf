@@ -1,0 +1,6 @@
+We have the choice of running our Js a few ways:
+1. run in it in a web page
+2. run it from the command line using node
+ Node is typically a server-side javascript language - but we can use it as a REPL (read, evaluate, print and loop). This can be done at www.repl.it
+
+Note: I had trouble upgrading Node with Homebrew since I follishly upgraded to El Capitan OS 11 last week. I'll have to revisit this later.
