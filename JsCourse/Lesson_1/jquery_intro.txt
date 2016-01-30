@@ -1,0 +1,67 @@
+Jquery:
+You can look up offcial documenation for Jquery APIs on api.jquery.com.
+There you can search for methods and they are also sorted by categories. We will maily work with the "Traversing".
+Jquery is included from a CDN in a script tag if not stored locally. You can obtain the script tag to include in the header on the CDN if you search on Google.
+
+
+Using Jquery:
+You want to make sure the page is loaded, If we don't wait and we try to access the DOM via js, our code wont work.
+Two ways to solve this:
+1. Include our Js in the bottom of the page, right before the body closing element tag.
+2. Wrap the js code in the $(document).ready(function() {..
+3. This, however wll still not work on images because at the same time you are attempting run the document ready function, external assets are being loaded. So instead, you have run
+$(window).on("load", function() {....
+
+You will often times see $(document).ready(function() {   }); and $(function() { }); which is shorthand for the former or also JQuery(function() and the funtions will run when the document is ready.
+
+
+Prefix all JQuery variables or collections with a '$'
+-jquery's width function takes in account "box-sizing". The width that is given will also take into account the border and padding.
+- you can use functions as getters/setters.
+
+Chaining:
+You can chaing methods in jquery, rather than executing these indivdual method class.
+  example: $content.css("font-size", 16px).css("color", red)};
+But you can also use the object syntax where you assign key:value pairs at once:
+$content.css ({
+    "font-size": 16px,
+    "color": #333333
+    });
+
+CSS properties with a hyphen can also be CamelCased.
+.filter(":nth-of-type(3n)") filters to every 3rd element
+$("li").filter("["data-id"])
+
+$li[0] vs $li.eq[0] -using eiq qill create a jQuery object which includes all the jQuery functions.
+
+$content.find("p ~ p") - sibling finder
+
+$content.find("p + p") - sibling finder with a paragraph proceeding it
+
+$content.find("ul + p") - sibling finder with a ul proceeding it
+
+input selectors is the most basic way to obtain objects where an input is required. This fields, buttons, etc.
+$inputs.filter(":text).each(function() { console.log($this
+You shuld make sure you're using "" or '' when using classes.
+
+The Css property will always render before the DOM property.You have to use the prop method when dealing with the radio buttons or checkboxes, rather than the CSS attribute method
+
+Traversing DOM for parent/parents
+$("li.item-a").parents.("ui").css("background", "red").
+The parent function will only grab the closest parent found while parents will look throughout the entire page.
+The difference between parents and closest is that if the object you're on matches the selector you're searching for, it will simply return itself unlike parents that will search the entrie document and list those that match the search in order of relation to the object your on (closest to furthest)
+
+Look up the difference between the uniary operator and the parseInt function. parseInt will be more robust in converting non digits but if you have control over the inputs, the uniary operator will provide some shortcuts
+
+Methods are functions that are attached to objects
+Jquery function is a function, not a method since is in just in the window space
+The math funtion has additional methods can be called on it called properties
+
+
+Variables can be
+undefined, false or null. Null is really used for garbage collection
+properties are also undefined
+
+e and event is non-trivial event object
+
+

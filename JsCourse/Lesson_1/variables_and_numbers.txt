@@ -1,0 +1,62 @@
+Declare a variable named numerator and set it to 10.
+ var numerator = 10;
+Solution
+Declare a variable named denominator and set it to 2.
+ var demoninator = 2
+Solution
+Declare a variable named answer and set it to the result of numerator divided by denominator. Log the value of answer, which should be 5.
+
+Solution
+Declare a variable named incrementer and set it to 1.
+
+Solution
+Declare a variable named start and set it to incrementer.
+
+Solution
+Declare variables named end and difference and leave them undefined. Separate the declarations with a comma.
+
+Solution
+In JavaScript, we can use a shorthand operator to add or subtract from a variable. If we wanted to add one to our incrementer variable, we would write incrementer = incrementer + 1. JavaScript allows us to shorten this statement by using the self-addition operator. We would remove the second reference to incrementer and move the addition operator before the equals sign, like incrementer += 1. The same can be done for the other three basic arithmetic operations, subtraction, multiplication, and division.
+
+Increment the incrementer variable by 1 three times using shorthand self-addition.
+
+Solution
+There's an even shorter method of incrementing and decrementing a variable by one. These are known as increment and decrement shorthand operators. To increment a variable by one, we can write the variable name immediately followed by two plus signs, like incrementer++. This particular operator is a postfix operator, because it comes after the variable name.
+
+Increment the incrementer variable by 1 twice using increment shorthand.
+
+Solution
+Set the value of end to incrementer and the value of difference to end minus start. Log the value of end, which should be 6. Log the value of difference, which should be 5.
+
+Solution
+Write the arithmetic statement that will set a variable answer to the result of 11 plus 31 multiplied by 3. Write this all as one statement, then log the result. Your result should be 126. If you're getting a result of 104, you'll need to use parentheses to change the order of operations so the addition happens before the multiplication.
+
+Create a variable named box_number and set it to the result of 356.toString(). You should receive an error. If you can call toString on a variable that points to a number, why can't you call it directly on a number? In JavaScript, the period immediately after a number is read as a decimal place, not a method separator. Adding a second period will act as the method separator, allowing you to call it directly on a number.
+
+Rewrite the statement to use two periods between the number and the toString method and log the result. Then modify your code to use parentheses rather than two periods. Remove the second period and surround the number with parentheses. Log the result.
+
+var box_number = 356.toString();
+var box_number = 356..toString();
+console.log(box_number);
+box_number = (356).toString();
+console.log(box_number)
+
+
+Convert the box_number variable back to a number using the unary + operator. To make sure you have converted it from a string to a number, you can log typeof box_number to check its type before and after your conversion. To convert it back to a string, rather than calling the toString method add an empty string to it. Log the typeof to verify it has been changed
+
+console.log(typeof box_number);
+box_number = +box_number;
+console.log(typeof box_number);
+box_number = "" + box_number;
+console.log(typeof box_number);
+
+Here's a list of topics you should have a basic understanding of:
+
+variables and the var keyword
+numbers and basic arithmetic operators
+strings and string methods
+logic and conditionals
+difference between == and ===
+jQuery event binding
+jQuery traversal using find
+setting and getting elements' text and inputs' values

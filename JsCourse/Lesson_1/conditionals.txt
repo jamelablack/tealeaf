@@ -1,0 +1,9 @@
+Expressions
+
+if (price < 200 || price > 600) {
+  alert("Price is too low or too high!");
+} else {
+  alert("Price is right!");
+}
+
+

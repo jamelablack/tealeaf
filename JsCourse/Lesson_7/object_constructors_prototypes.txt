@@ -1,0 +1,116 @@
+1.Create an object named invoices using the Object constructor. Set a property of foo to 130 and bar to 250.
+var invoices = new Object();
+    invoices.foo = 130;
+    invoices.bar = 250;
+
+2. Create an object named payments using an object literal, setting properties of foo to 80 and bar to 55.
+var payments = {
+   foo: 80;
+   bar: 55;
+};
+
+3. Create a variable named payments_received and set it to 0. Then, subtract the foo and bar properties in payments from the corresponding foo and bar properties in invoices. Then add the values of foo and bar on the payments object and save that sum in payments_received.
+
+var payments_recieved = 0;
+invoices.foo -= payments.foo;
+invoices.bar -= payments.bar;
+payments_recieved = payments.foo + paymemts.bar;
+console.log(payments_recieved);
+
+4.Create a variable named remaining_due and set it to 0. Create a for in loop that loops through the properties of the invoices object and adds the value of the current property to the remaining_due variable. Log the value of remaining_due. Here's an example of a for in loop:
+var remaining_due = 0;
+for (client in invoices) {
+  remaining_due += invoices[client];
+}
+console.log(remaining_due);
+
+5. Create a new object named second_invoices using Object.create, passing in the invoices object as an argument. Log the value of the second_invoices foo property. Change the value of the foo property of invoices to 0. Log the value of the second_invoices foo property.
+
+  var second_invoices = Object.create(invoices);
+  invoices.foo = 0;
+  console.log(second_invoices.foo);
+
+6. We're going to need an object template for our invoices to prevent one object's property being a pointer to the other's. Since we're going to be invoicing our same two clients the same amount every invoice, we can create an Invoices template object. Set the property foo to 130 and bar to 250.
+
+new Invoices = {
+  foo: 130;
+  bar: 250;
+}
+
+7. Using the new Invoices object as a template, create an array called outstanding_invoices and add two new Invoices objects to it using Object.create.
+var outstanding_invoices = [];
+outstanding_invoices.push(Object.create(Invoices));
+outstanding_invoices.push(Oject.creatae(Invoices));
+
+8.We want to make sure the properties on our Invoices template cannot be changed accidentally. Using Object.freeze, freeze the Invoices object. Log the value of Invoices.foo. Attempt to change the value of Invoices.foo to some other value. Log the value of Invoices.foo.
+Object.freeze(Invoices);
+console.log(Invoices.foo);
+Invoices.foo = 0;
+cosole.log(Invoices.foo);
+
+9. We've received payment in full from our "foo" client for our first invoice. Accessing the first invoice object and property directly, change its value to 0. Log the value of the first invoice's foo property.
+outstanding_invoices[0].foo = 0
+console.log(outstanding_invoices[0].foo);
+
+10. Oh no! It looks like the invoices in our outstanding_invoices array are also frozen as a result. To make sure, log the return of Object.isFrozen, first by passing in Invoices, then passing in the first invoice from the outstanding_invoices array.
+console.log(Object.isFrozen(Invoices));
+console.log(Object.isfrozen(outstanding_invoices[0]));
+
+11. Our second log value is false, yet we are unable to change its properties. We're getting false back because the properties on the created invoice object are not its own properties. Instead, they are pointing back to the parent Invoices properties.
+
+To get around this, let's start over. Create a function named newInvoices and return an object literal containing the properties foo and bar and their corresponding values. Use this function to create the outstanding_invoices array as we did before.
+
+function newInvoices() {
+  return {
+    foo:  130,
+    bar: 250
+  };
+}
+
+var outstanding_invoices = [];
+outstanding_invoices.push(newInvoices());
+outstanding_invoices.push(newInvoices());
+
+12. Now change the foo property on the first invoice to 0. Log the value afterwards. Now log the value of the second invoice's foo amount.
+
+outstanding_invoices[0].foo = 0;
+console.log(outstanding_invoices[0].foo);
+
+13. We're now able to create new invoices and can change their properties without affecting the existing invoices' amounts. However, we now have an invoice period where we worked all weekend for our "bar" client and need to charge a greater amount. We could create a new invoice period and modify the bar value afterwards, but we want to optionally pass in values for foo and bar to our newInvoices function instead. Change the newInvoices function to accept two arguments, one for foo's invoice amount and the other for bar's. Use each of those values if they exist and are numbers, otherwise use the default. Once you're done, create a third invoice period, passing in undefined for foo and 400 for bar.
+
+fucntion newInvoices(foo, bar) {
+  return {
+    foo: isNaN(foo) ? 130 : foo,
+    bar: isNaN(bar) ? 250 : bar
+  };
+}
+
+outstanding_invoices.push(newInvoices(undefined, 4000));
+
+14. Having to pass in both arguments when we're only changing the value of bar is annoying. We want to pass in only the values that are being overridden instead. Change the newInvoices function to accept one argument, an object. In your function, use the property on the argument if it exists, otherwise use the default. You'll also need to account for the function being called without arguments, so be sure to check to see if the argument exists first, and if not set it to an empty object. Note: You can use the || operator to shorten the syntax.
+
+function newInvoices(clients) {
+  clients = clients || {};
+    return {
+      foo: clients.foo || 130,
+      bar: clients.bar || 250
+  };
+}
+
+15. It would be helpful to get a total from each invoice without having to do the math manually. Let's add a method on our invoices object that will return the sum of the two invoice amounts. In your newInvoices function, store the invoices object that you're currently returning in a variable named invoices. Set the values as you already are, then using the dot notation, set a method named getTotal that adds the two amounts by accessing them through the local variable and using dot notation. Be sure to return the result. Create a new invoice and log the return of getTotal.
+
+function newInvoices(clients) {
+  clients = clients || {};
+    return {
+      foo: clients.foo || 130,
+      bar: clients.bar || 250
+  };
+  invoices.getTotal = function() {
+    return  invoices.foo + invoices.bar;
+  };
+  return invoices;
+}
+
+outstanding_invoices.push(newInvoices());
+console.log(outstanding_invoices[3].getTotal());
+

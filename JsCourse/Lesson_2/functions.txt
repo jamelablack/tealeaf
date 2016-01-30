@@ -1,0 +1,40 @@
+Functions
+
+
+
+
+
+1. We have a need for a piece of code that can be reused to return the average of three numbers. Create a function statement named average that takes three arguments, a, b, and c, and returns their average. Call the function by passing in three numbers and log the result.
+
+function average(a, b, c) {
+  return (a + b + c) / 3;
+}
+
+console.log(average(3, 5, 8));
+
+2. We now also need to calculate the sum of the same three data points. Create a function statement named sum that takes the same three arguments and returns the sum of the three arguments. Now modify the average function to call the sum function with those three arguments and use the return to calculate the average.
+
+
+function sum(a, b, c) {
+return a + b + c;
+}
+
+function average(a, b, c) {
+return sum(a, b, c)/3;
+}
+
+
+3. What if we have a different number of data points to create an average from? As the function exists now, we'd have to write other functions to take different numbers of arguments. Instead, we'll change the function to accept an array and loop over the array elements to create a total before dividing by the length of the array in order to calculate the average.
+
+At the start of the average function, create a variable named total and set it to 0. With each iteration of the for loop, add the element to the total. Once you're outside the for loop, return the total divided by the array's length. Call average with an array of five numbers and log the result
+
+function average(values) {
+var total = 0
+for (var i = 0, len = values.length, i < len, i++) {
+ total = values[i];
+}
+return total/len;
+}
+
+console.log(avaerage([1, 2, 3, 4, 5]));
+

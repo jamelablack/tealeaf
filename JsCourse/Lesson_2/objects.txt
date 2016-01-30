@@ -1,0 +1,10 @@
+1.var invoices = {
+  unpaid: [],
+};
+
+2. invoices.add = function(name, amount) {
+  this.unpaid.push({
+    name: name,
+    amount: amount
+});
+};

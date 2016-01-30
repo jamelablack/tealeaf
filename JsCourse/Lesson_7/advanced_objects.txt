@@ -1,0 +1,73 @@
+1. The getPrototypeOf method on Object is used to return the prototype object of an object that is passed in. If we call Object.getPrototypeOf([]) we will receive the Array prototype object. Using this method and Object.create, make a new array constructor function called NewArray whose prototype will be a copy of the Array prototype rather than a reference to it. To make sure you copied the prototype rather than reference it, add a first method on the NewArray prototype that will return the first element in the NewArray.
+
+function NewArray() { }
+NewArray.prototype = Object.create(Object.getPrototypeOf([]));
+
+NewArray.prototype.first = function() { return this[0]; }
+
+var new_arr = new NewArray(),
+    old_arr = new Array();
+old_arr.push(5);
+new_arr.push(5);
+old_arr.push(2);
+new_arr.push(2);
+console.log(new_arr.first());
+console.log(typeof old_arr.first);
+
+2. We want to have an object constructor that returns us a new object with a log function that cannot be modified. In a normal constructor, this is not possible, however using the defineProperties method on Object we can provide properties and values and set whether each property can be changed or not. Here is an example of creating a property on an object that is read-only.
+var obj = { name: "Obj" };
+Object.defineProperties(obj, {
+  age: {
+    value: 30,
+    writable: false
+  }
+});
+
+console.log(obj.age); // 30
+obj.age = 32;
+console.log(obj.age); // 30
+
+Using this method, create a function that constructs a new object with a log method that is read-only. The log method will use console.log to output the name property on itself.
+
+Answer:
+function newPerson(name) {
+  return Object.defineProperties({ name: name }, {
+    log: {
+      value: function() {
+        console.log(this.name);
+      },
+      writable: false
+    }
+  });
+}
+
+var me = newPerson("Shane Riley");
+me.log();
+me.log = function() { console.log("Amanda Rose"); };
+me.log();
+
+3. If we wanted to have an object with properties that are all immutable, or not able to be changed, we can use the Object.freeze method to prevent anything from being changed about an object (read more on this method here. This prevents any property values that are not arrays or objects from being changed or deleted. Keep in mind that if you freeze an object, it can not be unfrozen. Create an object with one property and value to hold a number, a string, an array, an object, and a function. Freeze the object, then attempt to change each of the property values. You can then check to make sure the object is still frozen by passing it into the object method isFroze
+
+Answer:
+var frozen = {
+  integer: 4,
+  string: "String",
+  array: [1, 2, 3],
+  object: {
+    foo: "bar"
+  },
+  func: function() { console.log("I'm frozen"); }
+};
+
+Object.freeze(frozen);
+frozen.integer = 8;
+frozen.string = "Number";
+frozen.array.pop();
+frozen.object.foo = "baz";
+frozen.func = function() { console.log("I'm not really frozen"); };
+
+console.log(frozen.integer);
+console.log(frozen.string);
+console.log(frozen.array);
+console.log(frozen.object.foo);
+frozen.func();

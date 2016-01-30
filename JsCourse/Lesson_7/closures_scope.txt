@@ -1,0 +1,316 @@
+1. Begin by creating a total variable with a value of 50. Create a function named incrementBy that takes an argument used to add to the total. Log the initial value of total, then call incrementBy and pass in 15. Log the new result of total. Note that we are modifying the value of total inside a function.
+var total = 50;
+
+function incrementBy(amount) {
+  total += amount;
+}
+
+console.log(total); // 50
+incrementBy(15);
+console.log(total); // 65
+
+2. Modify the incrementBy method to have a total variable declared on its first line using the var statement, setting it to 0. Re-run the script and note the result in the second log.
+var total = 50;
+
+function incrementBy(amount) {
+  var total = 0;
+  total += amount;
+}
+
+console.log(total); // 50
+incrementBy(15);
+console.log(total); // 50
+
+3. Using the code from the first exercise as a starting point, create another variable called increment immediately after total and set it to 15. Set your parameter name for incrementBy to the name increment. Now log the total as a check. Call incrementBy and pass the variable increment. Log the new value of total. Call incrementBy again, but this time without an argument. Log the value of total. Notice that even though our parameter name is the same as a variable that exists within the same scope as the total variable, it is not the same variable. Parameter names become locally scoped variables, even if they have the same names as more globally scoped variables.
+
+var total = 50,
+    increment = 15;
+
+function incrementBy(increment) {
+  total += increment;
+}
+
+console.log(total); // 50
+incrementBy(increment);
+console.log(total); // 65
+incrementBy();
+console.log(total); // NaN
+
+4. Starting over, create a variable named fruit and set its value to "apple". Create a function named setFruitType that changes the value of fruit to "banana". Log the value of fruit. Call setFruitType, then log the value of fruit again. The value should be what you now expect. When you are done, place a var statement before the fruit variable assignment in your function and run it again. Note that the var statement will create a variable within the current scope, even if it shares a name with a variable already part of the current scope.
+
+var fruit = "apple";
+
+function setFruitType() {
+  fruit = "banana";
+}
+
+console.log(fruit);
+setFruitType();
+console.log(fruit);
+
+5. Create a groceries object that will have properties representing grocery items and values representing prices of those items. Create a function called getTotal that accepts an items argument. Within it, set a variable named total to 0, then iterate over the properties of the items object and add the price of the current property to the total. After this loop, set a property named total on the items object to the value of total. Call the getTotal function and pass in the groceries object. Log the value of groceries.total. Note that when an object is passed in to a function, it can be modified from within the function even if the argument's name is different than the originating object.
+
+var groceries = {
+  apples: .99,
+  oranges: 1.35,
+  bananas: 2.25
+};
+
+function getTotal(items) {
+  var total = 0;
+
+  for (var item in items) {
+    total += items[item];
+  }
+  items.total = total;
+}
+
+getTotal(groceries);
+console.log(groceries.total);
+
+6. When objects are passed in to functions as arguments, they are passed by reference rather than the value of the variable being passed in. With variables that hold a number or string, the value of the variable is passed in. This is known as pass by value. Since only the value is passed, not the actual variable, if anything changes to the value the original variable is unchanged. With objects and arrays, they are passed by reference. This means that the variables for arrays and objects are simply pointing to where in memory these objects and arrays are. The pointer gets passed in to the function, and as a result the same array or object is being accessed and manipulated in memory.
+
+Try a similar exercise with an array. Create an array of numeric temperatures, then write a function called removeLastTemperature that will take an array as its argument. In the function, pop the last temperature off of the array. Call this function with the temperatures array and log the temperatures array afterwards.
+
+var temperatures = [53, 86, 12, 43];
+
+function removeLastTemperature(temps) {
+  return temps.pop();
+}
+
+removeLastTemperature(temperatures);
+console.log(temperatures);
+
+7. To illustrate how a function's scope context changes depending on where it is called from, we're going to start by creating a function called average with a parameter named values that will loop over the values and calculate the average. To start with, our function will take a single argument, the array to work with. You can then try it out using the same temperatures array as before. If you use the array from our previous solution, the average should be 48.5.
+
+function average(values) {
+  var total = 0;
+
+  for (var i = values.length - 1; i >= 0; i--) {
+    total += values[i];
+  }
+
+  return total / values.length;
+}
+
+console.log(average(temperatures));
+
+Now we're going to change the function to instead work with the context variable, this. Remove the values argument from your definition and replace instances of values with the keyword this. Call the function again, passing in the temperatures array and check out the result returned.
+4. Starting over, create a variable named fruit and set its value to "apple". Create a function named setFruitType that changes the value of fruit to "banana". Log the value of fruit. Call setFruitType, then log the value of fruit again. The value should be what you now expect. When you are done, place a var statement before the fruit variable assignment in your function and run it again. Note that the var statement will create a variable within the current scope, even if it shares a name with a variable already part of the current scope.
+
+var fruit = "apple";
+
+function setFruitType() {
+  fruit = "banana";
+}
+
+console.log(fruit);
+setFruitType();
+console.log(fruit);
+
+5. Create a groceries object that will have properties representing grocery items and values representing prices of those items. Create a function called getTotal that accepts an items argument. Within it, set a variable named total to 0, then iterate over the properties of the items object and add the price of the current property to the total. After this loop, set a property named total on the items object to the value of total. Call the getTotal function and pass in the groceries object. Log the value of groceries.total. Note that when an object is passed in to a function, it can be modified from within the function even if the argument's name is different than the originating object.
+
+var groceries = {
+  apples: .99,
+  oranges: 1.35,
+  bananas: 2.25
+};
+
+function getTotal(items) {
+  var total = 0;
+
+  for (var item in items) {
+    total += items[item];
+  }
+  items.total = total;
+}
+
+getTotal(groceries);
+console.log(groceries.total);
+
+6. When objects are passed in to functions as arguments, they are passed by reference rather than the value of the variable being passed in. With variables that hold a number or string, the value of the variable is passed in. This is known as pass by value. Since only the value is passed, not the actual variable, if anything changes to the value the original variable is unchanged. With objects and arrays, they are passed by reference. This means that the variables for arrays and objects are simply pointing to where in memory these objects and arrays are. The pointer gets passed in to the function, and as a result the same array or object is being accessed and manipulated in memory.
+
+Try a similar exercise with an array. Create an array of numeric temperatures, then write a function called removeLastTemperature that will take an array as its argument. In the function, pop the last temperature off of the array. Call this function with the temperatures array and log the temperatures array afterwards.
+
+var temperatures = [53, 86, 12, 43];
+
+function removeLastTemperature(temps) {
+  return temps.pop();
+}
+
+removeLastTemperature(temperatures);
+console.log(temperatures);
+
+7. To illustrate how a function's scope context changes depending on where it is called from, we're going to start by creating a function called average with a parameter named values that will loop over the values and calculate the average. To start with, our function will take a single argument, the array to work with. You can then try it out using the same temperatures array as before. If you use the array from our previous solution, the average should be 48.5.
+
+function average(values) {
+  var total = 0;
+
+  for (var i = values.length - 1; i >= 0; i--) {
+    total += values[i];
+  }
+
+  return total / values.length;
+}
+
+console.log(average(temperatures));
+
+Now we're going to change the function to instead work with the context variable, this. Remove the values argument from your definition and replace instances of values with the keyword this. Call the function again, passing in the temperatures array and check out the result returned.
+4. Starting over, create a variable named fruit and set its value to "apple". Create a function named setFruitType that changes the value of fruit to "banana". Log the value of fruit. Call setFruitType, then log the value of fruit again. The value should be what you now expect. When you are done, place a var statement before the fruit variable assignment in your function and run it again. Note that the var statement will create a variable within the current scope, even if it shares a name with a variable already part of the current scope.
+
+var fruit = "apple";
+
+function setFruitType() {
+  fruit = "banana";
+}
+
+console.log(fruit);
+setFruitType();
+console.log(fruit);
+
+5. Create a groceries object that will have properties representing grocery items and values representing prices of those items. Create a function called getTotal that accepts an items argument. Within it, set a variable named total to 0, then iterate over the properties of the items object and add the price of the current property to the total. After this loop, set a property named total on the items object to the value of total. Call the getTotal function and pass in the groceries object. Log the value of groceries.total. Note that when an object is passed in to a function, it can be modified from within the function even if the argument's name is different than the originating object.
+
+var groceries = {
+  apples: .99,
+  oranges: 1.35,
+  bananas: 2.25
+};
+
+function getTotal(items) {
+  var total = 0;
+
+  for (var item in items) {
+    total += items[item];
+  }
+  items.total = total;
+}
+
+getTotal(groceries);
+console.log(groceries.total);
+
+6. When objects are passed in to functions as arguments, they are passed by reference rather than the value of the variable being passed in. With variables that hold a number or string, the value of the variable is passed in. This is known as pass by value. Since only the value is passed, not the actual variable, if anything changes to the value the original variable is unchanged. With objects and arrays, they are passed by reference. This means that the variables for arrays and objects are simply pointing to where in memory these objects and arrays are. The pointer gets passed in to the function, and as a result the same array or object is being accessed and manipulated in memory.
+
+Try a similar exercise with an array. Create an array of numeric temperatures, then write a function called removeLastTemperature that will take an array as its argument. In the function, pop the last temperature off of the array. Call this function with the temperatures array and log the temperatures array afterwards.
+
+var temperatures = [53, 86, 12, 43];
+
+function removeLastTemperature(temps) {
+  return temps.pop();
+}
+
+removeLastTemperature(temperatures);
+console.log(temperatures);
+
+7. To illustrate how a function's scope context changes depending on where it is called from, we're going to start by creating a function called average with a parameter named values that will loop over the values and calculate the average. To start with, our function will take a single argument, the array to work with. You can then try it out using the same temperatures array as before. If you use the array from our previous solution, the average should be 48.5.
+
+function average(values) {
+  var total = 0;
+
+  for (var i = values.length - 1; i >= 0; i--) {
+    total += values[i];
+  }
+
+  return total / values.length;
+}
+
+console.log(average(temperatures));
+
+Now we're going to change the function to instead work with the context variable, this. Remove the values argument from your definition and replace instances of values with the keyword this. Call the function again, passing in the temperatures array and check out the result returned.
+4. Starting over, create a variable named fruit and set its value to "apple". Create a function named setFruitType that changes the value of fruit to "banana". Log the value of fruit. Call setFruitType, then log the value of fruit again. The value should be what you now expect. When you are done, place a var statement before the fruit variable assignment in your function and run it again. Note that the var statement will create a variable within the current scope, even if it shares a name with a variable already part of the current scope.
+
+var fruit = "apple";
+
+function setFruitType() {
+  fruit = "banana";
+}
+
+console.log(fruit);
+setFruitType();
+console.log(fruit);
+
+5. Create a groceries object that will have properties representing grocery items and values representing prices of those items. Create a function called getTotal that accepts an items argument. Within it, set a variable named total to 0, then iterate over the properties of the items object and add the price of the current property to the total. After this loop, set a property named total on the items object to the value of total. Call the getTotal function and pass in the groceries object. Log the value of groceries.total. Note that when an object is passed in to a function, it can be modified from within the function even if the argument's name is different than the originating object.
+
+var groceries = {
+  apples: .99,
+  oranges: 1.35,
+  bananas: 2.25
+};
+
+function getTotal(items) {
+  var total = 0;
+
+  for (var item in items) {
+    total += items[item];
+  }
+  items.total = total;
+}
+
+getTotal(groceries);
+console.log(groceries.total);
+
+6. When objects are passed in to functions as arguments, they are passed by reference rather than the value of the variable being passed in. With variables that hold a number or string, the value of the variable is passed in. This is known as pass by value. Since only the value is passed, not the actual variable, if anything changes to the value the original variable is unchanged. With objects and arrays, they are passed by reference. This means that the variables for arrays and objects are simply pointing to where in memory these objects and arrays are. The pointer gets passed in to the function, and as a result the same array or object is being accessed and manipulated in memory.
+
+Try a similar exercise with an array. Create an array of numeric temperatures, then write a function called removeLastTemperature that will take an array as its argument. In the function, pop the last temperature off of the array. Call this function with the temperatures array and log the temperatures array afterwards.
+
+var temperatures = [53, 86, 12, 43];
+
+function removeLastTemperature(temps) {
+  return temps.pop();
+}
+
+removeLastTemperature(temperatures);
+console.log(temperatures);
+
+7. To illustrate how a function's scope context changes depending on where it is called from, we're going to start by creating a function called average with a parameter named values that will loop over the values and calculate the average. To start with, our function will take a single argument, the array to work with. You can then try it out using the same temperatures array as before. If you use the array from our previous solution, the average should be 48.5.
+
+function average(values) {
+  var total = 0;
+
+  for (var i = values.length - 1; i >= 0; i--) {
+    total += values[i];
+  }
+
+  return total / values.length;
+}
+
+console.log(average(temperatures));
+
+8. Now we're going to change the function to instead work with the context variable, this. Remove the values argument from your definition and replace instances of values with the keyword this. Call the function again, passing in the temperatures array and check out the result returned.
+
+
+function average() {
+  var total = 0;
+
+  for (var i = this.length - 1; i >= 0; i--) {
+    total += this[i];
+  }
+
+  return total / this.length;
+}
+
+console.log(average(temperatures));
+
+
+9. If you rewrote the function properly, you should have received NaN as the result. This is because our function is being called from the window scope (or global scope if you are working within the Node REPL), so the context variable this within the function is the window object rather than our temperatures array. For our context to be the temperatures array, we need to use either the call or apply method on our function. Both of these methods will allow us to change the context that the function is executed with, and both execute the function immediately with that context. Try both methods out, passing in the temperatures array as the argument to both call and apply.
+
+console.log(average.call(temperatures));
+console.log(average.apply(temperatures));
+
+10. We can also create a new function that will permanently change the context it is called with. Functions have a method called bind that will allow us to pass in the context we want to use when it is called, and the new function can be stored in a variable. Using this method, create a variable named averageTemperature that will store the average function bound to the temperatures array. Then execute the function and check the result.
+
+var averageTemperature = average.bind(temperatures);
+
+console.log(averageTemperature());
+
+11. This newly bound function gives us the added benefit of being able to manipulate the temperatures array, then simply calling the function again and knowing that it will use the latest temperatures array. Add a temperature of 115 to the temperatures array, then call the averageTemperature function again. You'll see the average increases because it is using the current state of the temperatures array.
+
+temperatures.push(115);
+console.log(averageTemperature());
+
+
+12. We can also change the context that our function is called with by assigning it as a method to an object. When assigned to an object, the function's context is the parent object unless bound otherwise. Since arrays are also objects, we can add a method to our temperatures array and simply call it from there. Assign the property average on the temperatures array to the average function, then call the average method on the temperatures array.
+
+temperatures.average = average
+console.log(temperatures.average());
+
+

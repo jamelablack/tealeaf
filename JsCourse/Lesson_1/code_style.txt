@@ -3,15 +3,26 @@ Variable Names:
 - names with multiple words should be snake cased
 - variables containing functions should be camel cased
 - all are preixed with the word "var"
+- variables not proefixed with var ceate gobal variables that can be problematic.
+- Consturctor variables should be capitalized
+- Define variables at the top of functions
+
 
 Object properties:
 - same rules apply as with variables
 
-Fromatting:
+Formatting:
 - indenting is done with two spaces, never use tabs
 - when using curly braces on mulptiples lines. the closing braces is on it's own line
 - semicolons are awlways to terminate a statement
 - strings are used with double quotes
 - multiple variable definitions are defined with a single var and commas to seperate each.
 
+Methods: are functions called in the context of an object
+Functions are just functions on their own
+
+Bad:
+Swith Operator
+Eval()
+Js Funtion Builder
 
